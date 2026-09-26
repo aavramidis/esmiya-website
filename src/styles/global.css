@@ -1,13 +1,13 @@
 :root {
-  --paper: #f3ebe3;
-  --paper-deep: #e5d6c6;
+  --paper: #3c2a21;
+  --paper-deep: #35241c;
   --stone: #c4aa94;
-  --stone-deep: #8d7364;
-  --clay: #7a4e38;
+  --stone-deep: #a8927e;
+  --clay: #d4b896;
   --ink: #1a1210;
-  --ink-soft: #3a2e28;
-  --muted: #6a574c;
-  --line: rgba(26, 18, 16, 0.14);
+  --ink-soft: #e4d5c6;
+  --muted: #b8a596;
+  --line: rgba(228, 208, 180, 0.22);
   --night: #140f0d;
   --night-raise: #241c18;
   --cream: #f6f0e8;
@@ -17,7 +17,7 @@
   --measure: 68rem;
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Source Sans 3", "Avenir Next", "Segoe UI", sans-serif;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *,
@@ -33,7 +33,7 @@ html {
 body {
   margin: 0;
   background: var(--paper);
-  color: var(--ink);
+  color: var(--cream);
   font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.6;
@@ -50,13 +50,13 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--clay);
+  outline: 2px solid var(--laouto);
   outline-offset: 3px;
 }
 
 ::selection {
-  background: #c4aa94;
-  color: var(--ink);
+  background: rgba(228, 208, 180, 0.35);
+  color: var(--cream);
 }
 
 .skip {
@@ -161,7 +161,7 @@ a {
 
 .kicker {
   margin: 0 0 0.8rem;
-  color: var(--clay);
+  color: var(--laouto);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -221,27 +221,32 @@ a {
 }
 
 .button-fill {
-  background: var(--ink);
+  background: rgba(228, 208, 180, 0.12);
+  border: 1px solid rgba(246, 240, 232, 0.55);
   color: var(--cream);
 }
 
 .button-fill:hover {
-  background: var(--clay);
+  background: rgba(228, 208, 180, 0.22);
+  border-color: var(--laouto);
+  color: var(--cream);
 }
 
 .button-line {
-  border: 1px solid rgba(26, 18, 16, 0.28);
+  border: 1px solid rgba(246, 240, 232, 0.45);
+  color: var(--cream);
 }
 
 .button-line:hover {
-  border-color: var(--clay);
-  color: var(--clay);
+  border-color: var(--laouto);
+  color: var(--laouto);
 }
 
 .hero-frame {
-  background: #c4aa94;
-  padding: 0.7rem;
-  box-shadow: 0 22px 50px rgba(26, 18, 16, 0.14);
+  background: transparent;
+  padding: 0.55rem;
+  border: 1px solid rgba(246, 240, 232, 0.72);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
 }
 
 .hero-frame img {
@@ -278,7 +283,7 @@ a {
   font-size: clamp(1.55rem, 2.4vw, 2.05rem);
   font-weight: 500;
   line-height: 1.35;
-  color: var(--ink);
+  color: var(--cream);
 }
 
 .support,
@@ -583,8 +588,9 @@ a {
 }
 
 .gallery-carousel {
-  margin-top: 2rem;
+  width: min(100%, 52rem);
   max-width: 52rem;
+  margin: 2rem auto 0;
 }
 
 .gallery-carousel:focus-visible {
@@ -592,7 +598,7 @@ a {
 }
 
 .gallery-carousel:focus-visible .gallery-viewport {
-  outline: 2px solid var(--clay);
+  outline: 2px solid var(--laouto);
   outline-offset: 4px;
 }
 
@@ -600,7 +606,7 @@ a {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #fffaf4;
+  background: var(--night-raise);
 }
 
 .gallery-viewport .gallery-nav {
@@ -608,9 +614,9 @@ a {
   top: 50%;
   z-index: 2;
   transform: translateY(-50%);
-  border-color: rgba(26, 18, 16, 0.12);
-  background: rgba(243, 235, 227, 0.92);
-  box-shadow: 0 0.35rem 1.2rem rgba(26, 18, 16, 0.12);
+  border-color: rgba(228, 208, 180, 0.45);
+  background: rgba(36, 28, 24, 0.88);
+  box-shadow: 0 0.35rem 1.2rem rgba(0, 0, 0, 0.35);
 }
 
 .gallery-nav-prev {
@@ -652,7 +658,7 @@ a {
   max-height: min(72vh, 34rem);
   display: grid;
   place-items: center;
-  background: #f6f0e8;
+  background: var(--night);
 }
 
 .gallery-frame img {
@@ -670,15 +676,15 @@ a {
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fffaf4;
-  color: var(--ink);
+  background: var(--night-raise);
+  color: var(--cream);
   cursor: pointer;
   padding: 0;
 }
 
 .gallery-nav:hover:not(:disabled) {
-  border-color: var(--clay);
-  color: var(--clay);
+  border-color: var(--laouto);
+  color: var(--laouto);
 }
 
 .gallery-nav:disabled {
@@ -702,11 +708,14 @@ a {
   font-family: var(--serif);
   font-size: 1.15rem;
   font-style: italic;
-  color: var(--stone-deep);
+  color: var(--stone);
 }
 
 .gallery-credit {
-  margin: 1.1rem 0 0;
+  width: min(100%, 52rem);
+  max-width: 52rem;
+  margin: 1.1rem auto 0;
+  text-align: center;
   color: var(--muted);
   font-size: 0.88rem;
   letter-spacing: 0.03em;
@@ -720,7 +729,7 @@ a {
 }
 
 .member-card {
-  background: #fffaf4;
+  background: var(--night-raise);
   border: 1px solid var(--line);
 }
 
@@ -784,7 +793,7 @@ a {
 
 .member-card .role {
   margin: 0 0 0.35rem;
-  color: var(--clay);
+  color: var(--laouto);
   font-size: 0.92rem;
 }
 
@@ -798,12 +807,12 @@ a {
   font-family: var(--serif);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-weight: 500;
-  color: var(--ink);
+  color: var(--cream);
   text-underline-offset: 0.18em;
 }
 
 .email:hover {
-  color: var(--clay);
+  color: var(--laouto);
 }
 
 .site-footer {
