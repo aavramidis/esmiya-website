@@ -118,7 +118,10 @@ const jsonLd = {
               const role = member.role[locale];
               return (
                 <article class="member-card" data-id={member.id}>
-                  <div class="member-photo">
+                  <div
+                    class="member-photo"
+                    style={'photoAspect' in member ? `aspect-ratio: ${member.photoAspect}` : undefined}
+                  >
                     <img
                       src={member.image}
                       alt={name ? `${name}, ${role}` : role}

@@ -569,11 +569,8 @@ a {
   object-position: center center;
 }
 
-.member-card[data-id="defi"] .member-photo {
-  aspect-ratio: 1100 / 1133;
-}
-
 .member-card[data-id="defi"] .member-photo img {
+  object-fit: contain;
   object-position: center center;
 }
 
