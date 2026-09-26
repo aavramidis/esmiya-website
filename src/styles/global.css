@@ -451,12 +451,17 @@ a {
 }
 
 .seek {
+  --played: 0%;
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 4px;
   border-radius: 999px;
-  background: rgba(228, 208, 180, 0.28);
+  background: linear-gradient(
+    to right,
+    var(--laouto) var(--played),
+    rgba(228, 208, 180, 0.28) var(--played)
+  );
   outline: none;
 }
 
@@ -492,9 +497,19 @@ a {
   font-size: 0.88rem;
 }
 
-.video-shelf {
-  grid-template-columns: minmax(0, 1fr);
-  max-width: 22rem;
+.video-soon {
+  margin: 1.7rem 0 0;
+  color: #d9cbbd;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+}
+
+.video-soon span {
+  margin-right: 0.7rem;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  letter-spacing: 0;
+  color: var(--cream);
 }
 
 .portrait-block {

@@ -78,12 +78,10 @@ const jsonLd = {
         <h2>{t.musicTitle}</h2>
         <p class="section-lead">{t.musicLead}</p>
         <MusicPlayer locale={locale} t={t} />
-        <div class="shelf video-shelf">
-          <article>
-            <h3>{t.videosLabel}</h3>
-            <p class="soon">{t.soon}</p>
-          </article>
-        </div>
+        <p class="video-soon">
+          <span>{t.videosLabel}</span>
+          {t.soon}
+        </p>
       </div>
     </section>
 
