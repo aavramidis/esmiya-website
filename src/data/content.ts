@@ -54,6 +54,23 @@ export const members = [
   },
 ] as const;
 
+export const tracks = [
+  {
+    id: 'malevizotis',
+    src: '/audio/malevizotis.mp3',
+    duration: 986,
+    title: { el: 'Μαλεβιζώτης', en: 'Malevizotis' },
+    note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
+  },
+  {
+    id: 'protos-syrtos',
+    src: '/audio/protos-syrtos.mp3',
+    duration: 986,
+    title: { el: 'Πρώτος συρτός', en: 'Protos syrtos' },
+    note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
+  },
+] as const;
+
 export const dictionary = {
   el: {
     htmlLang: 'el',
@@ -89,10 +106,15 @@ export const dictionary = {
     musicKicker: 'Ακούστε',
     musicTitle: 'Μουσική',
     musicLead:
-      'Οι ηχογραφήσεις και τα βίντεο θα συγκεντρωθούν εδώ, μόλις είναι έτοιμα για κοινή ακρόαση.',
+      'Δύο δοκιμαστικές ηχογραφήσεις, για μια πρώτη ακρόαση του ήχου της Εσμιγιάς.',
     recordingsLabel: 'Ηχογραφήσεις',
     videosLabel: 'Βίντεο',
     soon: 'Σύντομα',
+    play: 'Αναπαραγωγή',
+    pause: 'Παύση',
+    seek: 'Θέση στο κομμάτι',
+    nowPlaying: 'Παίζει τώρα',
+    audioError: 'Η ηχογράφηση δεν μπόρεσε να φορτώσει.',
     mediaKicker: 'Φωτογραφία',
     mediaTitle: 'Εικόνα',
     mediaCaption: 'Η Εσμιγιά.',
@@ -142,10 +164,15 @@ export const dictionary = {
       'Four musicians meet around laouta, flutes and a frame drum. Their sound is built where those timbres join.',
     musicKicker: 'Listen',
     musicTitle: 'Music',
-    musicLead: 'Recordings and videos will gather here once they are ready to be shared.',
+    musicLead: 'Two demo recordings, for a first listen to Esmiya’s sound.',
     recordingsLabel: 'Recordings',
     videosLabel: 'Video',
     soon: 'Soon',
+    play: 'Play',
+    pause: 'Pause',
+    seek: 'Seek',
+    nowPlaying: 'Now playing',
+    audioError: 'This recording could not be loaded.',
     mediaKicker: 'Photograph',
     mediaTitle: 'Portrait',
     mediaCaption: 'Esmiya.',

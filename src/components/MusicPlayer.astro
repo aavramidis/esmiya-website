@@ -1,0 +1,224 @@
+---
+import { tracks, type Copy, type Locale } from '../data/content';
+
+interface Props {
+  locale: Locale;
+  t: Copy;
+}
+
+const { locale, t } = Astro.props;
+
+const formatTime = (seconds: number) => {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+};
+---
+
+<div class="player" data-player data-play-label={t.play} data-pause-label={t.pause} data-now-playing={t.nowPlaying}>
+  <ol class="playlist">
+    {
+      tracks.map((track) => {
+        const title = track.title[locale];
+        const note = track.note[locale];
+        return (
+          <li class="track" data-track data-title={title} data-src={track.src}>
+            <button
+              class="play-btn"
+              type="button"
+              data-play
+              aria-pressed="false"
+              aria-label={`${t.play}: ${title}`}
+            >
+              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5.5v13l11-6.5-11-6.5Z"></path>
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 5h3.4v14H7V5Zm6.6 0H17v14h-3.4V5Z"></path>
+              </svg>
+            </button>
+            <div class="track-body">
+              <div class="track-heading">
+                <h3>{title}</h3>
+                <p class="track-note">
+                  {note}
+                  <span aria-hidden="true"> · </span>
+                  <span data-duration>{formatTime(track.duration)}</span>
+                </p>
+              </div>
+              <div class="track-controls">
+                <span class="time" data-current>
+                  0:00
+                </span>
+                <label class="seek-label">
+                  <span class="visually-hidden">{t.seek}</span>
+                  <input
+                    class="seek"
+                    type="range"
+                    min="0"
+                    max="1000"
+                    value="0"
+                    step="1"
+                    data-seek
+                    aria-valuemin="0"
+                    aria-valuemax="1000"
+                    aria-valuenow="0"
+                  />
+                </label>
+                <span class="time" data-remaining>{formatTime(track.duration)}</span>
+              </div>
+              <p class="track-error" data-error hidden>{t.audioError}</p>
+            </div>
+            <audio preload="none" playsinline data-audio>
+              <source src={track.src} type="audio/mpeg" />
+            </audio>
+          </li>
+        );
+      })
+    }
+  </ol>
+</div>
+
+<script>
+  const formatTime = (seconds: number) => {
+    if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
+    const whole = Math.floor(seconds);
+    const m = Math.floor(whole / 60);
+    const s = whole % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+  };
+
+  const player = document.querySelector<HTMLElement>('[data-player]');
+  if (player) {
+    const playLabel = player.dataset.playLabel ?? 'Play';
+    const pauseLabel = player.dataset.pauseLabel ?? 'Pause';
+    const nowPlaying = player.dataset.nowPlaying ?? 'Now playing';
+    const rows = Array.from(player.querySelectorAll<HTMLElement>('[data-track]'));
+
+    let lastRow = rows[0];
+
+    const setPlaying = (row: HTMLElement, playing: boolean) => {
+      const button = row.querySelector<HTMLButtonElement>('[data-play]');
+      const title = row.dataset.title ?? '';
+      row.dataset.playing = playing ? 'true' : 'false';
+      button?.setAttribute('aria-pressed', String(playing));
+      button?.setAttribute('aria-label', `${playing ? pauseLabel : playLabel}: ${title}`);
+      if (playing) lastRow = row;
+    };
+
+    const pauseOthers = (active: HTMLElement) => {
+      rows.forEach((row) => {
+        if (row === active) return;
+        const audio = row.querySelector('audio');
+        if (audio && !audio.paused) audio.pause();
+      });
+    };
+
+    const updateMediaSession = (row: HTMLElement, audio: HTMLAudioElement) => {
+      if (!('mediaSession' in navigator)) return;
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: row.dataset.title ?? '',
+        artist: 'Εσμιγιά',
+        album: nowPlaying,
+      });
+      navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+    };
+
+    rows.forEach((row, index) => {
+      const audio = row.querySelector<HTMLAudioElement>('[data-audio]');
+      const button = row.querySelector<HTMLButtonElement>('[data-play]');
+      const seek = row.querySelector<HTMLInputElement>('[data-seek]');
+      const current = row.querySelector<HTMLElement>('[data-current]');
+      const remaining = row.querySelector<HTMLElement>('[data-remaining]');
+      const durationLabel = row.querySelector<HTMLElement>('[data-duration]');
+      const error = row.querySelector<HTMLElement>('[data-error]');
+      if (!audio || !button || !seek || !current || !remaining) return;
+
+      const syncSeek = () => {
+        const duration = audio.duration;
+        if (!Number.isFinite(duration) || duration <= 0) return;
+        const ratio = audio.currentTime / duration;
+        const value = String(Math.round(ratio * 1000));
+        if (!seek.matches(':active')) seek.value = value;
+        seek.setAttribute('aria-valuenow', value);
+        current.textContent = formatTime(audio.currentTime);
+        remaining.textContent = formatTime(Math.max(0, duration - audio.currentTime));
+      };
+
+      button.addEventListener('click', async () => {
+        if (audio.paused) {
+          pauseOthers(row);
+          try {
+            await audio.play();
+          } catch {
+            error?.removeAttribute('hidden');
+          }
+        } else {
+          audio.pause();
+        }
+      });
+
+      seek.addEventListener('input', () => {
+        const duration = audio.duration;
+        if (!Number.isFinite(duration) || duration <= 0) return;
+        audio.currentTime = (Number(seek.value) / 1000) * duration;
+        syncSeek();
+      });
+
+      audio.addEventListener('play', () => {
+        error?.setAttribute('hidden', '');
+        setPlaying(row, true);
+        updateMediaSession(row, audio);
+      });
+
+      audio.addEventListener('pause', () => {
+        setPlaying(row, false);
+        updateMediaSession(row, audio);
+      });
+
+      audio.addEventListener('timeupdate', syncSeek);
+      audio.addEventListener('loadedmetadata', () => {
+        if (Number.isFinite(audio.duration) && durationLabel) {
+          durationLabel.textContent = formatTime(audio.duration);
+        }
+        syncSeek();
+      });
+
+      audio.addEventListener('ended', () => {
+        audio.currentTime = 0;
+        syncSeek();
+        const next = rows[index + 1]?.querySelector<HTMLButtonElement>('[data-play]');
+        next?.click();
+      });
+
+      audio.addEventListener('error', () => {
+        error?.removeAttribute('hidden');
+        setPlaying(row, false);
+      });
+    });
+
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => {
+        void lastRow?.querySelector<HTMLAudioElement>('[data-audio]')?.play();
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        lastRow?.querySelector<HTMLAudioElement>('[data-audio]')?.pause();
+      });
+      navigator.mediaSession.setActionHandler('nexttrack', () => {
+        const index = Math.max(0, rows.indexOf(lastRow));
+        const next = rows[index + 1] ?? rows[0];
+        next?.querySelector<HTMLButtonElement>('[data-play]')?.click();
+      });
+      navigator.mediaSession.setActionHandler('previoustrack', () => {
+        const index = Math.max(0, rows.indexOf(lastRow));
+        const current = lastRow?.querySelector<HTMLAudioElement>('[data-audio]');
+        if (current && current.currentTime > 3) {
+          current.currentTime = 0;
+          return;
+        }
+        const prev = rows[index - 1] ?? rows[rows.length - 1];
+        prev?.querySelector<HTMLButtonElement>('[data-play]')?.click();
+      });
+    }
+  }
+</script>
