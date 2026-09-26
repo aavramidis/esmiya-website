@@ -19,32 +19,31 @@ export type Member = {
 export const members: Member[] = [
   {
     id: 'lyra',
-    image: '/images/band/members/laouto-flute.webp',
+    image: '/images/band/members/laouto-flute.webp?v=22',
     role: { el: 'Κρητική λύρα', en: 'Cretan lyra' },
     name: { el: 'Μανώλης Μολυμπάκης (Μολυμπής)', en: 'Manolis Molybakis (Molybis)' },
   },
   {
     id: 'laouto',
-    image: '/images/band/members/laouto.webp',
+    image: '/images/band/members/laouto.webp?v=2',
     role: { el: 'Κρητικό και στεριανό λαούτο, ούτι', en: 'Cretan and mainland laouto, oud' },
     name: { el: 'Αβραάμ Αβραμίδης', en: 'Avraam Avramidis' },
   },
   {
     id: 'winds',
-    image: '/images/band/members/flute.webp',
+    image: '/images/band/members/winds.webp',
     role: { el: 'Φλάουτο άλτο, πνευστά, μπαντουράκια', en: 'Alto flute, winds, mandourakia' },
     name: { el: 'Νίκος Κατριτζιδάκης', en: 'Nikos Katritzidakis' },
   },
   {
     id: 'percussion',
-    image: '/images/band/members/defi.webp',
-    photoAspect: '1400 / 1089',
+    image: '/images/band/members/percussion.webp?v=4',
     role: { el: 'Κρουστά — μπεντίρ, νταουλάκι', en: 'Percussion — bendir, daoulaki' },
     name: { el: 'Ιάκωβος Μολυμπάκης', en: 'Iakovos Molybakis' },
   },
   {
     id: 'bass',
-    initials: 'ΝΚ',
+    image: '/images/band/members/bass.webp',
     role: { el: 'Κοντραμπάσο', en: 'Double bass' },
     name: { el: 'Νίκος Καφετζής', en: 'Nikos Kafetzis' },
   },
