@@ -34,7 +34,7 @@ export const members = [
   },
   {
     id: 'flute',
-    image: '/images/band/members/flute.webp',
+    image: '/images/band/members/flute.webp?v=2',
     role: { el: 'Φλογέρα', en: 'Flute' },
     name: { el: '', en: '' },
     bio: {
