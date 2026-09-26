@@ -7,14 +7,11 @@ interface Props {
 }
 
 const { locale, t } = Astro.props;
-const otherHref = locale === 'el' ? '/en/#top' : '/#top';
-const otherLabel = locale === 'el' ? 'EN' : 'ΕΛ';
-const otherName = locale === 'el' ? 'English' : 'Ελληνικά';
 ---
 
 <a class="skip" href="#main">{t.skip}</a>
 <header class="site-header">
-  <a class="wordmark" href={locale === 'el' ? '/#top' : '/en/#top'}>Εσμιγιά</a>
+  <a class="wordmark" href={locale === 'el' ? '/#top' : '/en/#top'}>{t.footer}</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
     {t.menu}
   </button>
@@ -25,12 +22,12 @@ const otherName = locale === 'el' ? 'English' : 'Ελληνικά';
       ))
     }
     <div class="lang-switch">
-      <a href={locale === 'el' ? '/#top' : '/en/#top'} aria-current="true" lang={locale}>
-        {locale === 'el' ? 'ΕΛ' : 'EN'}
+      <a href="/#top" lang="el" hreflang="el" aria-label="Ελληνικά" aria-current={locale === 'el' ? 'true' : undefined}>
+        ΕΛ
       </a>
       <span aria-hidden="true">/</span>
-      <a href={otherHref} data-lang-switch hreflang={locale === 'el' ? 'en' : 'el'} lang={locale === 'el' ? 'en' : 'el'} aria-label={otherName}>
-        {otherLabel}
+      <a href="/en/#top" lang="en" hreflang="en" aria-label="English" aria-current={locale === 'en' ? 'true' : undefined}>
+        EN
       </a>
     </div>
   </nav>

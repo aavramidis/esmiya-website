@@ -17,8 +17,8 @@ const canonicalPath = locale === 'el' ? '/' : '/en/';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
-  name: 'Εσμιγιά',
-  alternateName: 'Esmiya',
+  name: locale === 'el' ? 'Εσμιγιά' : 'Esmiya',
+  alternateName: locale === 'el' ? 'Esmiya' : 'Εσμιγιά',
   url: locale === 'el' ? 'https://esmiya.gr/' : 'https://esmiya.gr/en/',
   genre: locale === 'el' ? 'Κρητική μουσική' : 'Cretan music',
   image: 'https://esmiya.gr/images/band/portrait.jpg',
@@ -47,7 +47,7 @@ const jsonLd = {
       <div class="hero-copy">
         <p class="kicker">{t.heroKicker}</p>
         <h1>{t.heroTitle}</h1>
-        <p class="latin">{t.heroLatin}</p>
+        {t.heroLatin && <p class="latin">{t.heroLatin}</p>}
         <p class="lead">{t.heroLead}</p>
         <p class="instruments">{t.instruments}</p>
         <div class="hero-actions">
@@ -124,7 +124,6 @@ const jsonLd = {
       <div class="section-inner">
         <p class="kicker">{t.membersKicker}</p>
         <h2>{t.membersTitle}</h2>
-        <p class="section-lead">{t.membersLead}</p>
         <div class="member-grid">
           {
             members.map((member) => {
