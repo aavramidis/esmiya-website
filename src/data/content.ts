@@ -44,7 +44,7 @@ export const members = [
   },
   {
     id: 'laouto',
-    image: '/images/band/members/laouto.webp',
+    image: '/images/band/members/laouto.webp?v=2',
     role: { el: 'Λαούτο', en: 'Laouto' },
     name: { el: '', en: '' },
     bio: {

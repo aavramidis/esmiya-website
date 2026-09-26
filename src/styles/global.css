@@ -561,6 +561,14 @@ a {
   object-position: center 18%;
 }
 
+.member-card[data-id="laouto"] .member-photo {
+  aspect-ratio: 1400 / 1237;
+}
+
+.member-card[data-id="laouto"] .member-photo img {
+  object-position: center center;
+}
+
 .member-card h3 {
   margin: 0;
   font-family: var(--serif);
