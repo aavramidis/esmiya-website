@@ -22,6 +22,11 @@ const jsonLd = {
   genre: locale === 'el' ? 'Κρητική μουσική' : 'Cretan music',
   image: 'https://esmiya.gr/images/band/portrait.jpg',
   email: t.email,
+  member: members.map((member) => ({
+    '@type': 'Person',
+    name: member.name[locale],
+    jobTitle: member.role[locale],
+  })),
 };
 ---
 
@@ -114,18 +119,22 @@ const jsonLd = {
             members.map((member) => {
               const name = member.name[locale];
               const role = member.role[locale];
+              const note = member.note?.[locale];
               return (
                 <article class="member-card" data-id={member.id}>
                   <div class="member-photo">
-                    <img
-                      src={member.image}
-                      alt={name ? `${name}, ${role}` : role}
-                      loading="lazy"
-                    />
+                    {member.image ? (
+                      <img src={member.image} alt={`${name}, ${role}`} loading="lazy" />
+                    ) : (
+                      <div class="member-photo-empty" aria-hidden="true">
+                        <span>{member.initials}</span>
+                      </div>
+                    )}
                   </div>
                   <div class="member-copy">
-                    {name ? <p class="role">{role}</p> : null}
-                    <h3>{name || role}</h3>
+                    <p class="role">{role}</p>
+                    <h3>{name}</h3>
+                    {note ? <p class="member-note">{note}</p> : null}
                     <p>{member.bio[locale]}</p>
                   </div>
                 </article>
