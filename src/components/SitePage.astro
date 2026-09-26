@@ -119,7 +119,6 @@ const jsonLd = {
             members.map((member) => {
               const name = member.name[locale];
               const role = member.role[locale];
-              const note = member.note?.[locale];
               return (
                 <article class="member-card" data-id={member.id}>
                   <div class="member-photo">
@@ -134,8 +133,6 @@ const jsonLd = {
                   <div class="member-copy">
                     <p class="role">{role}</p>
                     <h3>{name}</h3>
-                    {note ? <p class="member-note">{note}</p> : null}
-                    <p>{member.bio[locale]}</p>
                   </div>
                 </article>
               );
