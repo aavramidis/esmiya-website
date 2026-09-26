@@ -69,9 +69,13 @@ const formatTime = (seconds: number) => {
               </div>
               <p class="track-error" data-error hidden>{t.audioError}</p>
             </div>
-            <audio preload="none" playsinline data-audio>
-              <source src={track.src} type="audio/mpeg" />
-            </audio>
+            <audio
+              src={track.src}
+              preload="metadata"
+              playsinline
+              webkit-playsinline
+              data-audio
+            ></audio>
           </li>
         );
       })
@@ -109,8 +113,9 @@ const formatTime = (seconds: number) => {
     const pauseOthers = (active: HTMLElement) => {
       rows.forEach((row) => {
         if (row === active) return;
-        const audio = row.querySelector('audio');
-        if (audio && !audio.paused) audio.pause();
+        const other = row.querySelector('audio');
+        if (other && !other.paused) other.pause();
+        setPlaying(row, false);
       });
     };
 
@@ -151,6 +156,7 @@ const formatTime = (seconds: number) => {
           pauseOthers(row);
           setPlaying(row, true);
           try {
+            if (audio.readyState < 2) audio.load();
             await audio.play();
           } catch {
             setPlaying(row, false);
