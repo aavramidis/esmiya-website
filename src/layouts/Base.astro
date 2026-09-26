@@ -59,13 +59,6 @@ const english = new URL('/en/', site).href;
           toggle?.setAttribute('aria-expanded', 'false');
         });
       });
-      const hash = window.location.hash;
-      if (hash) {
-        document.querySelectorAll('[data-lang-switch]').forEach((link) => {
-          const href = link.getAttribute('href');
-          if (href) link.setAttribute('href', href.split('#')[0] + hash);
-        });
-      }
     </script>
   </body>
 </html>

@@ -55,7 +55,7 @@ export const tracks = [
     src: '/audio/malevizotis.mp3',
     duration: 216,
     title: { el: 'Μαλεβυζιώτης', en: 'Malevyziotis' },
-    note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
+    note: { el: 'Ηχογραφήση', en: 'Recording' },
   },
   {
     id: 'protos-syrtos',
@@ -65,7 +65,7 @@ export const tracks = [
       el: 'Πρώτος συρτός, Μαδάρες, Λουσακιανός συρτός',
       en: 'Protos syrtos, Madares, Lousakianos syrtos',
     },
-    note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
+    note: { el: 'Ηχογραφήση', en: 'Recording' },
   },
 ] as const;
 
@@ -104,11 +104,10 @@ export const dictionary = {
     aboutQuote:
       'Η «Εσμιγιά» νοηματοδοτεί συμβολικά τη συνύπαρξη, την ανάγκη των ανθρώπων για συνεύρεση, την επικοινωνία και το σημείο συνάντησης στη δημιουργία ενός νέου μουσικού σχήματος. Με σκοπό τη ψυχαγωγία, πειραματίζονται, στο συγκερασμό των ηχοχρωμάτων, σε νέες συνθέσεις, ανθολογώντας την Κρητική μουσική παράδοση.',
     aboutSupport:
-      'Πέντε μουσικοί. Λύρα, λαούτο και ούτι, φλάουτο και πνευστά, κρουστά και κοντραμπάσο. Ο καθένας έχει κύριο όργανο και παίζει κι άλλα.',
+      'Πέντε μουσικοί. Λύρα, λαούτο και ούτι, φλάουτο και πνευστά, κρουστά και κοντραμπάσο.',
     musicKicker: 'Ακούστε',
     musicTitle: 'Μουσική',
-    musicLead:
-      'Δύο δοκιμαστικές ηχογραφήσεις, για μια πρώτη ακρόαση του ήχου της Εσμιγιάς.',
+    musicLead: 'Ηχογραφήσεις',
     recordingsLabel: 'Ηχογραφήσεις',
     videosLabel: 'Βίντεο',
     soon: 'Σύντομα',
@@ -160,10 +159,10 @@ export const dictionary = {
     aboutQuote:
       '“Esmiya” stands for coexistence, for the need to come together, for communication, and for the meeting point from which a new ensemble is born. They experiment in the blending of timbres and in new compositions, anthologizing the Cretan musical tradition.',
     aboutSupport:
-      'Five musicians. Lyra, laouto and oud, flute and winds, percussion and double bass. Each has a main instrument, and plays others as well.',
+      'Five musicians. Lyra, laouto and oud, flute and winds, percussion and double bass.',
     musicKicker: 'Listen',
     musicTitle: 'Music',
-    musicLead: 'Two demo recordings, for a first listen to Esmiya’s sound.',
+    musicLead: 'Recordings',
     recordingsLabel: 'Recordings',
     videosLabel: 'Video',
     soon: 'Soon',

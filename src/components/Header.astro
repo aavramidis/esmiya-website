@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { locale, t } = Astro.props;
-const otherHref = locale === 'el' ? '/en/' : '/';
+const otherHref = locale === 'el' ? '/en/#top' : '/#top';
 const otherLabel = locale === 'el' ? 'EN' : 'ΕΛ';
 const otherName = locale === 'el' ? 'English' : 'Ελληνικά';
 ---
