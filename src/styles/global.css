@@ -582,22 +582,134 @@ a {
   border: 0;
 }
 
-.portrait-block {
-  max-width: 46rem;
-  margin: 2rem auto 0;
+.gallery-carousel {
+  margin-top: 2rem;
+  max-width: 52rem;
 }
 
-.portrait-block .hero-frame {
-  box-shadow: none;
+.gallery-carousel:focus-visible {
+  outline: none;
 }
 
-.portrait-block figcaption {
-  margin-top: 0.8rem;
+.gallery-carousel:focus-visible .gallery-viewport {
+  outline: 2px solid var(--clay);
+  outline-offset: 4px;
+}
+
+.gallery-viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fffaf4;
+}
+
+.gallery-viewport .gallery-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  border-color: rgba(26, 18, 16, 0.12);
+  background: rgba(243, 235, 227, 0.92);
+  box-shadow: 0 0.35rem 1.2rem rgba(26, 18, 16, 0.12);
+}
+
+.gallery-nav-prev {
+  left: 0.75rem;
+}
+
+.gallery-nav-next {
+  right: 0.75rem;
+}
+
+.gallery-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-slide {
+  display: none;
+}
+
+.gallery-slide.is-active {
+  display: block;
+  animation: gallery-fade 0.45s ease;
+}
+
+@keyframes gallery-fade {
+  from {
+    opacity: 0.35;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.gallery-frame {
+  margin: 0;
+  min-height: min(52vh, 22rem);
+  max-height: min(72vh, 34rem);
+  display: grid;
+  place-items: center;
+  background: #f6f0e8;
+}
+
+.gallery-frame img {
+  display: block;
+  width: 100%;
+  max-height: min(72vh, 34rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.gallery-nav {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fffaf4;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+}
+
+.gallery-nav:hover:not(:disabled) {
+  border-color: var(--clay);
+  color: var(--clay);
+}
+
+.gallery-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.gallery-nav svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gallery-status {
+  margin: 0.95rem 0 0;
   text-align: center;
-  color: var(--muted);
   font-family: var(--serif);
+  font-size: 1.15rem;
   font-style: italic;
-  font-size: 1.35rem;
+  color: var(--stone-deep);
+}
+
+.gallery-credit {
+  margin: 1.1rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
 }
 
 .member-grid {
@@ -807,4 +919,7 @@ a {
     scroll-behavior: auto;
   }
 
+  .gallery-slide.is-active {
+    animation: none;
+  }
 }

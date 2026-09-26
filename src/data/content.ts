@@ -7,6 +7,87 @@ export const portrait = {
   height: 2000,
 };
 
+export type GalleryPhoto = {
+  id: string;
+  src: string;
+  srcSet: string;
+  width: number;
+  height: number;
+  featured?: boolean;
+  alt: { el: string; en: string };
+};
+
+export const galleryPhotos: GalleryPhoto[] = [
+  {
+    id: 'outdoor-plaza',
+    src: '/images/gallery/outdoor-plaza.webp',
+    srcSet: '/images/gallery/outdoor-plaza-720.webp 720w, /images/gallery/outdoor-plaza.webp 1024w',
+    width: 1024,
+    height: 624,
+    featured: true,
+    alt: {
+      el: 'Η Εσμιγιά σε εξωτερικό χώρο: τέσσερις μουσικοί με παραδοσιακά όργανα.',
+      en: 'Esmiya outdoors: four musicians with traditional instruments.',
+    },
+  },
+  {
+    id: 'lyra-laouto-wall',
+    src: '/images/gallery/lyra-laouto-wall.webp',
+    srcSet: '/images/gallery/lyra-laouto-wall-720.webp 720w, /images/gallery/lyra-laouto-wall.webp 1024w',
+    width: 1024,
+    height: 635,
+    alt: {
+      el: 'Δύο μουσικοί με κρητική λύρα και λαούτο μπροστά σε πέτρινο τοίχο.',
+      en: 'Two musicians with Cretan lyra and laouto in front of a stone wall.',
+    },
+  },
+  {
+    id: 'lyra-laouto-outdoor',
+    src: '/images/gallery/lyra-laouto-outdoor.webp',
+    srcSet:
+      '/images/gallery/lyra-laouto-outdoor-720.webp 720w, /images/gallery/lyra-laouto-outdoor.webp 1024w',
+    width: 1024,
+    height: 624,
+    alt: {
+      el: 'Μουσικοί παίζουν λύρα και λαούτο κάτω από τον ουρανό.',
+      en: 'Musicians playing lyra and laouto under open sky.',
+    },
+  },
+  {
+    id: 'percussion',
+    src: '/images/gallery/percussion.webp',
+    srcSet: '/images/gallery/percussion-720.webp 720w, /images/gallery/percussion.webp 682w',
+    width: 682,
+    height: 952,
+    alt: {
+      el: 'Μουσικός με νταούλι και ξύλινα μπακέτες.',
+      en: 'Musician with a frame drum and wooden beaters.',
+    },
+  },
+  {
+    id: 'flute',
+    src: '/images/gallery/flute.webp',
+    srcSet: '/images/gallery/flute-720.webp 720w, /images/gallery/flute.webp 682w',
+    width: 682,
+    height: 952,
+    alt: {
+      el: 'Μουσικός παίζει ξύλινο φλάουτο μπροστά σε πέτρινο τοίχο.',
+      en: 'Musician playing a wooden flute in front of a stone wall.',
+    },
+  },
+  {
+    id: 'group-portrait',
+    src: '/images/gallery/group-portrait.webp',
+    srcSet: '/images/gallery/group-portrait-720.webp 720w, /images/gallery/group-portrait.webp 1024w',
+    width: 1024,
+    height: 962,
+    alt: {
+      el: 'Η Εσμιγιά: τέσσερις μουσικοί με λύρα, νταούλι, φλάουτο και λαούτο μπροστά σε πέτρινο τοίχο.',
+      en: 'Esmiya: four musicians with lyra, frame drum, flute and laouto in front of a stone wall.',
+    },
+  },
+];
+
 export type Member = {
   id: string;
   image?: string;
@@ -87,7 +168,7 @@ export const dictionary = {
     nav: [
       { href: '#about', label: 'Η Εσμιγιά' },
       { href: '#music', label: 'Μουσική' },
-      { href: '#media', label: 'Πορτρέτο' },
+      { href: '#media', label: 'Φωτογραφίες' },
       { href: '#members', label: 'Μουσικοί' },
       { href: '#contact', label: 'Επικοινωνία' },
     ],
@@ -119,9 +200,13 @@ export const dictionary = {
     unmute: 'Ήχος',
     nowPlaying: 'Παίζει τώρα',
     audioError: 'Η ηχογράφηση δεν φορτώθηκε.',
-    mediaKicker: 'Φωτογραφία',
-    mediaTitle: 'Πορτρέτο',
-    mediaCaption: 'Η Εσμιγιά.',
+    mediaKicker: 'Στιγμιότυπα',
+    mediaTitle: 'Φωτογραφίες',
+    mediaCredit: 'Φωτογραφίες: Tolilogiani',
+    galleryPrev: 'Προηγούμενη φωτογραφία',
+    galleryNext: 'Επόμενη φωτογραφία',
+    galleryStatusLabel: 'Θέση στη συλλογή',
+    galleryStatusTemplate: 'Φωτογραφία {n} από {total}',
     membersKicker: 'Οι μουσικοί',
     membersTitle: 'Μουσικοί',
     contactKicker: 'Γράψτε μας',
@@ -144,7 +229,7 @@ export const dictionary = {
     nav: [
       { href: '#about', label: 'The band' },
       { href: '#music', label: 'Music' },
-      { href: '#media', label: 'Portrait' },
+      { href: '#media', label: 'Photos' },
       { href: '#members', label: 'Members' },
       { href: '#contact', label: 'Contact' },
     ],
@@ -176,9 +261,13 @@ export const dictionary = {
     unmute: 'Unmute',
     nowPlaying: 'Now playing',
     audioError: 'This recording could not be loaded.',
-    mediaKicker: 'Photograph',
-    mediaTitle: 'Portrait',
-    mediaCaption: 'Esmiya.',
+    mediaKicker: 'Snapshots',
+    mediaTitle: 'Photos',
+    mediaCredit: 'Photos: Tolilogiani',
+    galleryPrev: 'Previous photo',
+    galleryNext: 'Next photo',
+    galleryStatusLabel: 'Gallery position',
+    galleryStatusTemplate: 'Photo {n} of {total}',
     membersKicker: 'The musicians',
     membersTitle: 'Line-up',
     contactKicker: 'Contact',

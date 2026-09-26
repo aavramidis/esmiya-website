@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import GalleryCarousel from './GalleryCarousel.astro';
 import MusicPlayer from './MusicPlayer.astro';
 import { dictionary, featuredVideo, members, portrait, tracks, type Locale } from '../data/content';
 import '../styles/global.css';
@@ -103,20 +104,8 @@ const jsonLd = {
       <div class="section-inner">
         <p class="kicker">{t.mediaKicker}</p>
         <h2>{t.mediaTitle}</h2>
-        <figure class="portrait-block">
-          <div class="hero-frame">
-            <img
-              src={portrait.src}
-              srcset={portrait.srcSet}
-              sizes="(min-width: 800px) 46rem, 100vw"
-              width={portrait.width}
-              height={portrait.height}
-              alt={t.portraitAlt}
-              loading="lazy"
-            />
-          </div>
-          <figcaption>{t.mediaCaption}</figcaption>
-        </figure>
+        <GalleryCarousel locale={locale} t={t} />
+        <p class="gallery-credit">{t.mediaCredit}</p>
       </div>
     </section>
 

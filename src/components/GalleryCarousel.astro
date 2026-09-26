@@ -1,0 +1,128 @@
+---
+import { galleryPhotos, type Copy, type Locale } from '../data/content';
+
+interface Props {
+  locale: Locale;
+  t: Copy;
+}
+
+const { locale, t } = Astro.props;
+const total = galleryPhotos.length;
+const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{total}', String(total));
+---
+
+<div
+  class="gallery-carousel"
+  data-gallery
+  tabindex="0"
+  data-prev-label={t.galleryPrev}
+  data-next-label={t.galleryNext}
+  data-status-template={t.galleryStatusTemplate}
+>
+  <div class="gallery-viewport">
+    <button
+      class="gallery-nav gallery-nav-prev"
+      type="button"
+      data-prev
+      disabled={total <= 1}
+      aria-label={t.galleryPrev}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14.5 5.5 8 12l6.5 6.5"></path>
+      </svg>
+    </button>
+    <ul class="gallery-track">
+      {
+        galleryPhotos.map((photo, index) => (
+          <li
+            class:list={['gallery-slide', index === 0 && 'is-active']}
+            data-slide
+            data-index={index}
+            aria-hidden={index === 0 ? 'false' : 'true'}
+          >
+            <figure class="gallery-frame">
+              <img
+                src={photo.src}
+                srcset={photo.srcSet}
+                sizes="(min-width: 980px) 48rem, 100vw"
+                width={photo.width}
+                height={photo.height}
+                alt={photo.alt[locale]}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+    <button
+      class="gallery-nav gallery-nav-next"
+      type="button"
+      data-next
+      disabled={total <= 1}
+      aria-label={t.galleryNext}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9.5 5.5 16 12l-6.5 6.5"></path>
+      </svg>
+    </button>
+  </div>
+  <p class="gallery-status" aria-live="polite">
+    <span class="visually-hidden">{t.galleryStatusLabel}:</span>
+    <span data-gallery-status>{initialStatus}</span>
+  </p>
+</div>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>('[data-gallery]');
+  carousels.forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-next]');
+    const status = root.querySelector<HTMLElement>('[data-gallery-status]');
+    const prevLabel = root.dataset.prevLabel ?? 'Previous photo';
+    const nextLabel = root.dataset.nextLabel ?? 'Next photo';
+    const statusTemplate = root.dataset.statusTemplate ?? '{n} / {total}';
+    const total = slides.length;
+    if (!prev || !next || total === 0) return;
+
+    let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
+    if (index < 0) index = 0;
+
+    const formatStatus = (current: number) =>
+      statusTemplate.replace('{n}', String(current)).replace('{total}', String(total));
+
+    const setSlide = (nextIndex: number) => {
+      index = (nextIndex + total) % total;
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      if (status) status.textContent = formatStatus(index + 1);
+      const disabled = total <= 1;
+      prev.disabled = disabled;
+      next.disabled = disabled;
+    };
+
+    prev.setAttribute('aria-label', prevLabel);
+    next.setAttribute('aria-label', nextLabel);
+
+    prev.addEventListener('click', () => setSlide(index - 1));
+    next.addEventListener('click', () => setSlide(index + 1));
+
+    root.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        setSlide(index - 1);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        setSlide(index + 1);
+      }
+    });
+
+    setSlide(index);
+  });
+</script>

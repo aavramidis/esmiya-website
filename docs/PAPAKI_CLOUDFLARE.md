@@ -6,6 +6,21 @@ The site is this repo (Astro). Production branch is `main` on GitHub: `aavramidi
 
 Papaki mail-on-Cloudflare DNS, if you add a mailbox later: [Connect your email with the DNS service](https://support.papaki.com/help/connect-your-email-with-the-dns-service/?lang=en) (Scenario 2).
 
+## Status
+
+Phases A–D were completed on 27 Sep 2026 and checked the same night. Phases E and F are not done.
+
+| Phase | State |
+| ----- | ----- |
+| A — Domains on Cloudflare | Done. `esmiya.gr`, `esmigia.gr`, and `esmiyia.gr` are **Active**. Nameservers are `aaron.ns.cloudflare.com` and `diana.ns.cloudflare.com`. |
+| B — Pages | Done. Project `esmiya`, production branch `main`. |
+| C — `esmiya.gr` and `www` | Done. `https://esmiya.gr/` and `https://esmiya.gr/en/` return 200. `www` returns 301 to the apex and keeps the path. |
+| D — `esmigia.gr` and `esmiyia.gr` | Done. Apex and `www` return 301 to `https://esmiya.gr` and keep the path, including `/en/`. |
+| E — `info@esmiya.gr` | Not started. The address is on the page and does not receive mail yet. |
+| F — Search Console | Not started. |
+
+The steps in A–D are the record of what was done. E and F are still to do.
+
 ---
 
 ## Architecture
@@ -69,6 +84,8 @@ npm run preview
 
 ## Phase A — Domains on Cloudflare
 
+**Done** (27 Sep 2026). All three zones are **Active**.
+
 
 
 ### A1 — Cloudflare account
@@ -99,9 +116,9 @@ For the Cloudflare pair on this account:
 | | Hostname | IP address |
 |--|----------|------------|
 | DNS1 | `aaron.ns.cloudflare.com` | `108.162.195.150` |
-| DNS2 | `diana.ns.cloudflare.com` | `172.64.34.23` |
+| DNS2 | `diana.ns.cloudflare.com` | `162.159.38.23` |
 
-Leave DNS3–DNS6 empty. These addresses were resolved on 26 Sep 2026. Each nameserver also has other IPv4 addresses (`aaron`: `162.159.44.150`, `172.64.35.150`; `diana`: `108.162.194.23`, `162.159.38.23`). Any one IPv4 for that hostname is enough if Papaki rejects the first.
+Leave DNS3–DNS6 empty. DNS2’s address is the one already saved on `reperdo.gr`. `diana.ns.cloudflare.com` also answers on `172.64.34.23` and `108.162.194.23`; `aaron.ns.cloudflare.com` also answers on `162.159.44.150` and `172.64.35.150`. Any one IPv4 for that hostname is enough. The registry publishes the hostnames, not these IPs.
 
 The notice that a custom configuration deactivates Papaki services on this domain is expected. It means Papaki stops hosting DNS here. That is what you want for the Esmiya names.
 
@@ -113,11 +130,15 @@ Add `esmigia.gr` and `esmiyia.gr` as separate Cloudflare zones (Free plan each).
 
 After all three zones are **Active**, DNS lives in Cloudflare. Papaki is registrar and renewals (and the mailbox, if you create one).
 
+What happened on the first attempt: Cloudflare showed **Invalid nameservers**, then **pending**, while the `.gr` registry still had no delegation (`NXDOMAIN` for all three names). That is not a propagation wait. The nameserver form in Papaki has to be saved on each Esmiya domain, and the zone stays pending until the registry lists `aaron` and `diana` the way it already does for `reperdo.gr`. `esmiya.gr` became **Active** first; the other two followed after the same Papaki save.
+
 ---
 
 
 
 ## Phase B — Cloudflare Pages (GitHub)
+
+**Done** (27 Sep 2026). Project `esmiya` deploys `main`.
 
 **Wrong place:** a domain → **Workers Routes**. That maps URLs to Workers. Skip it.
 
@@ -160,6 +181,10 @@ Each **git push** to `main` redeploys.
 
 
 ## Phase C — `esmiya.gr` and `www`
+
+**Done** (27 Sep 2026). Apex returns 200. `www.esmiya.gr` returns 301 to `https://esmiya.gr` and keeps the path.
+
+While the zone was still pending, **Custom domains** showed **Transfer DNS management** and **Begin DNS transfer**. That button only repeats the nameserver step. It does not move the registration away from Papaki, and it does not create the site record. Add the custom domain again after the zone is **Active**, then accept the CNAME. Ignore the generic “add an A or MX record” recommendations on the empty DNS page.
 
 
 
@@ -208,6 +233,8 @@ Then try a private window, or a phone on mobile data. Cloudflare’s “recommen
 
 
 ## Phase D — Redirect `esmigia.gr` and `esmiyia.gr`
+
+**Done** (27 Sep 2026). Both names, with and without `www`, return 301 to `https://esmiya.gr` and keep the path (`/en/` included).
 
 Do this **twice**: once in the `esmigia.gr` zone, once in the `esmiyia.gr` zone. Not in the `esmiya.gr` zone.
 
@@ -395,7 +422,7 @@ If SMTP 465 fails, try **587** with STARTTLS. iPhone: **Settings → Mail → Ac
 2. **0 DNS records** when you create a zone is fine. Site and mail records come later.
 3. **Workers Routes is not Pages.** Use account-level **Pages**, and “Get started” if the wizard opens a Worker.
 4. **Do not set root directory to** `website`**.** That folder is ReperDo. This repo builds from `/` into `dist`.
-5. **NXDOMAIN after Cloudflare is Active** is often the Mac DNS cache. Flush it, or test on mobile data.
+5. **Invalid nameservers or a pending zone** means the `.gr` registry does not list `aaron` and `diana` yet. Saving the Papaki form is what fixes it. A Mac DNS flush only helps after the registry already delegates the name.
 6. **Redirect zones need both the rule and proxied CNAMEs** to the `*.pages.dev` hostname. A rule alone does nothing if the name does not resolve.
 7. **Do not attach** `esmigia.gr` **/** `esmiyia.gr` **as Pages custom domains.** The redirect rule in each of those zones is what sends people to `esmiya.gr`.
 8. **Do not redirect the apex** `esmiya.gr`**.** Only `www` on that zone.
