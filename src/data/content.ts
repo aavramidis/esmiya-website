@@ -70,6 +70,12 @@ export const tracks = [
   },
 ] as const;
 
+/** https://youtu.be/ZlkKvp1uZso */
+export const featuredVideo = {
+  youtubeId: 'ZlkKvp1uZso',
+  title: { el: 'Βίντεο της Εσμιγιάς', en: 'Esmiya video' },
+} as const;
+
 export const dictionary = {
   el: {
     htmlLang: 'el',
