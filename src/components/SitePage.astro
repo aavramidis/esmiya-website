@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { dictionary, members, portrait, type Locale } from '../data/content';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = dictionary[locale];
+const canonicalPath = locale === 'el' ? '/' : '/en/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: 'Εσμιγιά',
+  alternateName: 'Esmiya',
+  url: locale === 'el' ? 'https://esmiya.gr/' : 'https://esmiya.gr/en/',
+  genre: locale === 'el' ? 'Κρητική μουσική' : 'Cretan music',
+  image: 'https://esmiya.gr/images/band/portrait.jpg',
+  email: t.email,
+};
+---
+
+<Base locale={locale} title={t.title} description={t.description} canonicalPath={canonicalPath}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+  <Header locale={locale} t={t} />
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker">{t.heroKicker}</p>
+        <h1>{t.heroTitle}</h1>
+        <p class="latin">{t.heroLatin}</p>
+        <p class="lead">{t.heroLead}</p>
+        <p class="instruments">{t.instruments}</p>
+        <div class="hero-actions">
+          <a class="button button-fill" href="#about">{t.ctaAbout}</a>
+          <a class="button button-line" href="#music">{t.ctaMusic}</a>
+        </div>
+      </div>
+      <figure class="hero-frame">
+        <img
+          src={portrait.src}
+          srcset={portrait.srcSet}
+          sizes="(min-width: 800px) 52vw, 100vw"
+          width={portrait.width}
+          height={portrait.height}
+          alt={t.portraitAlt}
+          fetchpriority="high"
+        />
+      </figure>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-inner">
+        <p class="kicker">{t.aboutKicker}</p>
+        <h2>{t.aboutTitle}</h2>
+        <blockquote class="statement">{t.aboutQuote}</blockquote>
+        <p class="support">{t.aboutSupport}</p>
+      </div>
+    </section>
+
+    <section class="section band-dark" id="music">
+      <div class="section-inner">
+        <p class="kicker">{t.musicKicker}</p>
+        <h2>{t.musicTitle}</h2>
+        <p class="section-lead">{t.musicLead}</p>
+        <div class="shelf">
+          <article>
+            <h3>{t.recordingsLabel}</h3>
+            <p class="soon">{t.soon}</p>
+          </article>
+          <article>
+            <h3>{t.videosLabel}</h3>
+            <p class="soon">{t.soon}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="media">
+      <div class="section-inner">
+        <p class="kicker">{t.mediaKicker}</p>
+        <h2>{t.mediaTitle}</h2>
+        <figure class="portrait-block">
+          <div class="hero-frame">
+            <img
+              src={portrait.src}
+              srcset={portrait.srcSet}
+              sizes="(min-width: 800px) 46rem, 100vw"
+              width={portrait.width}
+              height={portrait.height}
+              alt={t.portraitAlt}
+              loading="lazy"
+            />
+          </div>
+          <figcaption>{t.mediaCaption}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="members" style="padding-top: 0">
+      <div class="section-inner">
+        <p class="kicker">{t.membersKicker}</p>
+        <h2>{t.membersTitle}</h2>
+        <p class="section-lead">{t.membersLead}</p>
+        <div class="member-grid">
+          {
+            members.map((member) => {
+              const name = member.name[locale];
+              const role = member.role[locale];
+              return (
+                <article class="member-card" data-id={member.id}>
+                  <div class="member-photo">
+                    <img
+                      src={member.image}
+                      alt={name ? `${name}, ${role}` : role}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="member-copy">
+                    {name ? <p class="role">{role}</p> : null}
+                    <h3>{name || role}</h3>
+                    <p>{member.bio[locale]}</p>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" style="padding-top: 0">
+      <div class="section-inner">
+        <p class="kicker">{t.contactKicker}</p>
+        <h2>{t.contactTitle}</h2>
+        <p class="section-lead">{t.contactLead}</p>
+        <a class="email" href={`mailto:${t.email}`}>{t.email}</a>
+      </div>
+    </section>
+  </main>
+  <Footer t={t} />
+</Base>

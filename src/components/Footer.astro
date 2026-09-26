@@ -1,0 +1,15 @@
+---
+import type { Copy } from '../data/content';
+
+interface Props {
+  t: Copy;
+}
+
+const { t } = Astro.props;
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <span>© {year} {t.footer}</span>
+  <a href={`mailto:${t.email}`}>{t.email}</a>
+</footer>

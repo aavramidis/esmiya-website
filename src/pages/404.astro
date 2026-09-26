@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { dictionary } from '../data/content';
+import '../styles/global.css';
+
+const t = dictionary.el;
+---
+
+<Base locale="el" title={t.notFoundTitle} description={t.notFoundLead} canonicalPath="/404/" noindex>
+  <Header locale="el" t={t} />
+  <main id="main" class="missing">
+    <h1>{t.notFoundTitle}</h1>
+    <p class="lead">{t.notFoundLead}</p>
+    <div class="missing-actions">
+      <a href="/">{t.notFoundHome}</a>
+      <a href="/en/">{t.notFoundEn}</a>
+    </div>
+  </main>
+  <Footer t={t} />
+</Base>
