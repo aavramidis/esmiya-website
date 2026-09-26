@@ -15,7 +15,16 @@ const formatTime = (seconds: number) => {
 };
 ---
 
-<div class="player" data-player data-play-label={t.play} data-pause-label={t.pause} data-now-playing={t.nowPlaying} data-artist={t.footer}>
+<div
+  class="player"
+  data-player
+  data-play-label={t.play}
+  data-pause-label={t.pause}
+  data-now-playing={t.nowPlaying}
+  data-artist={t.footer}
+  data-mute-label={t.mute}
+  data-unmute-label={t.unmute}
+>
   <ol class="playlist">
     {
       tracks.map((track) => {
@@ -50,21 +59,19 @@ const formatTime = (seconds: number) => {
                 <span class="time" data-current>
                   0:00
                 </span>
-                <label class="seek-label">
-                  <span class="visually-hidden">{t.seek}</span>
-                  <input
-                    class="seek"
-                    type="range"
-                    min="0"
-                    max="1000"
-                    value="0"
-                    step="1"
-                    data-seek
-                    aria-valuemin="0"
-                    aria-valuemax="1000"
-                    aria-valuenow="0"
-                  />
-                </label>
+                <input
+                  class="seek"
+                  type="range"
+                  min="0"
+                  max="1000"
+                  value="0"
+                  step="1"
+                  data-seek
+                  aria-label={t.seek}
+                  aria-valuemin="0"
+                  aria-valuemax="1000"
+                  aria-valuenow="0"
+                />
                 <span class="time" data-remaining>{formatTime(track.duration)}</span>
               </div>
               <p class="track-error" data-error hidden>{t.audioError}</p>
@@ -81,6 +88,30 @@ const formatTime = (seconds: number) => {
       })
     }
   </ol>
+  <div class="player-volume">
+    <button class="volume-btn" type="button" data-mute aria-pressed="false" aria-label={t.mute}>
+      <svg class="icon-volume" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9v6h4l5 5V4L8 9H4Zm11.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03ZM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77Z"></path>
+      </svg>
+      <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9v6h4l5 5V4L8 9H4Zm11.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03ZM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77Z"></path>
+        <path d="M3.27 3 2 4.27l7.73 7.73H2v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 3.27 3Z"></path>
+      </svg>
+    </button>
+    <input
+      class="seek volume-range"
+      type="range"
+      min="0"
+      max="100"
+      value="100"
+      step="1"
+      data-volume
+      aria-label={t.volume}
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="100"
+    />
+  </div>
 </div>
 
 <script>
@@ -92,14 +123,72 @@ const formatTime = (seconds: number) => {
     return `${m}:${String(s).padStart(2, '0')}`;
   };
 
+  const VOLUME_KEY = 'esmiya-volume';
+
   const player = document.querySelector<HTMLElement>('[data-player]');
   if (player) {
     const playLabel = player.dataset.playLabel ?? 'Play';
     const pauseLabel = player.dataset.pauseLabel ?? 'Pause';
     const nowPlaying = player.dataset.nowPlaying ?? 'Now playing';
+    const muteLabel = player.dataset.muteLabel ?? 'Mute';
+    const unmuteLabel = player.dataset.unmuteLabel ?? 'Unmute';
     const rows = Array.from(player.querySelectorAll<HTMLElement>('[data-track]'));
+    const audios = rows
+      .map((row) => row.querySelector<HTMLAudioElement>('[data-audio]'))
+      .filter((audio): audio is HTMLAudioElement => Boolean(audio));
+    const volumeInput = player.querySelector<HTMLInputElement>('[data-volume]');
+    const muteBtn = player.querySelector<HTMLButtonElement>('[data-mute]');
 
     let lastRow = rows[0];
+
+    const readStoredVolume = () => {
+      try {
+        const saved = localStorage.getItem(VOLUME_KEY);
+        if (saved === null) return 1;
+        const value = Number(saved);
+        if (!Number.isFinite(value)) return 1;
+        return Math.min(1, Math.max(0, value));
+      } catch {
+        return 1;
+      }
+    };
+
+    let volumeBeforeMute = readStoredVolume();
+    let userMuted = false;
+
+    const paintRange = (input: HTMLInputElement, ratio: number) => {
+      const percent = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+      input.style.setProperty('--played', percent);
+    };
+
+    const syncMuteButton = (muted: boolean) => {
+      if (!muteBtn) return;
+      muteBtn.setAttribute('aria-pressed', String(muted));
+      muteBtn.setAttribute('aria-label', muted ? unmuteLabel : muteLabel);
+      muteBtn.dataset.muted = muted ? 'true' : 'false';
+    };
+
+    const applyVolume = (level: number, { persist = true } = {}) => {
+      const clamped = Math.min(1, Math.max(0, level));
+      audios.forEach((audio) => {
+        audio.volume = clamped;
+        audio.muted = userMuted || clamped === 0;
+      });
+      if (volumeInput) {
+        const sliderValue = String(Math.round(clamped * 100));
+        volumeInput.value = sliderValue;
+        volumeInput.setAttribute('aria-valuenow', sliderValue);
+        paintRange(volumeInput, clamped);
+      }
+      syncMuteButton(userMuted || clamped === 0);
+      if (persist) {
+        try {
+          localStorage.setItem(VOLUME_KEY, String(clamped));
+        } catch {
+          /* ignore */
+        }
+      }
+    };
 
     const setPlaying = (row: HTMLElement, playing: boolean) => {
       const button = row.querySelector<HTMLButtonElement>('[data-play]');
@@ -139,16 +228,39 @@ const formatTime = (seconds: number) => {
       const error = row.querySelector<HTMLElement>('[data-error]');
       if (!audio || !button || !seek || !current || !remaining) return;
 
+      let scrubbing = false;
+
+      const updateSeekUi = (ratio: number, time: number, duration: number) => {
+        const value = String(Math.round(ratio * 1000));
+        seek.value = value;
+        paintRange(seek, ratio);
+        seek.setAttribute('aria-valuenow', value);
+        current.textContent = formatTime(time);
+        remaining.textContent = formatTime(Math.max(0, duration - time));
+      };
+
       const syncSeek = () => {
         const duration = audio.duration;
         if (!Number.isFinite(duration) || duration <= 0) return;
+        if (scrubbing) return;
         const ratio = audio.currentTime / duration;
-        const value = String(Math.round(ratio * 1000));
-        if (!seek.matches(':active')) seek.value = value;
-        seek.style.setProperty('--played', `${Math.min(100, Math.max(0, ratio * 100))}%`);
-        seek.setAttribute('aria-valuenow', value);
-        current.textContent = formatTime(audio.currentTime);
-        remaining.textContent = formatTime(Math.max(0, duration - audio.currentTime));
+        updateSeekUi(ratio, audio.currentTime, duration);
+      };
+
+      const seekFromSlider = () => {
+        const duration = audio.duration;
+        if (!Number.isFinite(duration) || duration <= 0) return;
+        const ratio = Number(seek.value) / 1000;
+        const time = ratio * duration;
+        updateSeekUi(ratio, time, duration);
+        audio.currentTime = time;
+      };
+
+      const stopScrubbing = () => {
+        if (!scrubbing) return;
+        scrubbing = false;
+        seekFromSlider();
+        syncSeek();
       };
 
       button.addEventListener('click', async () => {
@@ -168,12 +280,12 @@ const formatTime = (seconds: number) => {
         }
       });
 
-      seek.addEventListener('input', () => {
-        const duration = audio.duration;
-        if (!Number.isFinite(duration) || duration <= 0) return;
-        audio.currentTime = (Number(seek.value) / 1000) * duration;
-        syncSeek();
+      seek.addEventListener('pointerdown', () => {
+        scrubbing = true;
       });
+      seek.addEventListener('pointerup', stopScrubbing);
+      seek.addEventListener('pointercancel', stopScrubbing);
+      seek.addEventListener('input', seekFromSlider);
 
       audio.addEventListener('play', () => {
         error?.setAttribute('hidden', '');
@@ -187,6 +299,7 @@ const formatTime = (seconds: number) => {
       });
 
       audio.addEventListener('timeupdate', syncSeek);
+      audio.addEventListener('seeked', syncSeek);
       audio.addEventListener('loadedmetadata', () => {
         if (Number.isFinite(audio.duration) && durationLabel) {
           durationLabel.textContent = formatTime(audio.duration);
@@ -206,6 +319,35 @@ const formatTime = (seconds: number) => {
         setPlaying(row, false);
       });
     });
+
+    if (volumeInput && muteBtn) {
+      const initialVolume = readStoredVolume();
+      volumeBeforeMute = initialVolume > 0 ? initialVolume : 1;
+      userMuted = false;
+      applyVolume(initialVolume, { persist: false });
+
+      volumeInput.addEventListener('input', () => {
+        const level = Number(volumeInput.value) / 100;
+        userMuted = false;
+        volumeBeforeMute = level > 0 ? level : volumeBeforeMute;
+        applyVolume(level);
+      });
+
+      muteBtn.addEventListener('click', () => {
+        const level = Number(volumeInput.value) / 100;
+        if (userMuted || level === 0) {
+          userMuted = false;
+          applyVolume(volumeBeforeMute > 0 ? volumeBeforeMute : 1);
+          return;
+        }
+        volumeBeforeMute = level;
+        userMuted = true;
+        audios.forEach((audio) => {
+          audio.muted = true;
+        });
+        syncMuteButton(true);
+      });
+    }
 
     if ('mediaSession' in navigator) {
       navigator.mediaSession.setActionHandler('play', () => {
