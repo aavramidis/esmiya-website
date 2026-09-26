@@ -59,14 +59,17 @@ export const tracks = [
     id: 'malevizotis',
     src: '/audio/malevizotis.mp3',
     duration: 986,
-    title: { el: 'Μαλεβιζώτης', en: 'Malevizotis' },
+    title: { el: 'Μαλεβυζιώτης', en: 'Malevyziotis' },
     note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
   },
   {
     id: 'protos-syrtos',
     src: '/audio/protos-syrtos.mp3',
     duration: 986,
-    title: { el: 'Πρώτος συρτός', en: 'Protos syrtos' },
+    title: {
+      el: 'Πρώτος συρτός, Μαδάρες, Λουσακιανός συρτός',
+      en: 'Protos syrtos, Madares, Lousakianos syrtos',
+    },
     note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
   },
 ] as const;
