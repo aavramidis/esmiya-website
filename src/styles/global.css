@@ -1,6 +1,6 @@
 :root {
-  --paper: #3c2a21;
-  --paper-deep: #35241c;
+  --paper: #362520;
+  --paper-deep: #2f201c;
   --stone: #c4aa94;
   --stone-deep: #a8927e;
   --clay: #d4b896;
@@ -709,16 +709,6 @@ a {
   font-size: 1.15rem;
   font-style: italic;
   color: var(--stone);
-}
-
-.gallery-credit {
-  width: min(100%, 52rem);
-  max-width: 52rem;
-  margin: 1.1rem auto 0;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.88rem;
-  letter-spacing: 0.03em;
 }
 
 .member-grid {
