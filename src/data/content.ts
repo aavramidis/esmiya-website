@@ -11,6 +11,7 @@ export type Member = {
   id: string;
   image?: string;
   initials?: string;
+  photoAspect?: string;
   role: { el: string; en: string };
   name: { el: string; en: string };
 };
@@ -37,6 +38,7 @@ export const members: Member[] = [
   {
     id: 'percussion',
     image: '/images/band/members/defi.webp',
+    photoAspect: '1400 / 1089',
     role: { el: 'Κρουστά — μπεντίρ, νταουλάκι', en: 'Percussion — bendir, daoulaki' },
     name: { el: 'Ιάκωβος Μολυμπάκης', en: 'Iakovos Molybakis' },
   },
@@ -47,6 +49,26 @@ export const members: Member[] = [
     name: { el: 'Νίκος Καφετζής', en: 'Nikos Kafetzis' },
   },
 ];
+
+export const tracks = [
+  {
+    id: 'malevizotis',
+    src: '/audio/malevizotis.mp3',
+    duration: 216,
+    title: { el: 'Μαλεβυζιώτης', en: 'Malevyziotis' },
+    note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
+  },
+  {
+    id: 'protos-syrtos',
+    src: '/audio/protos-syrtos.mp3',
+    duration: 460,
+    title: {
+      el: 'Πρώτος συρτός, Μαδάρες, Λουσακιανός συρτός',
+      en: 'Protos syrtos, Madares, Lousakianos syrtos',
+    },
+    note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
+  },
+] as const;
 
 export const dictionary = {
   el: {
@@ -80,10 +102,16 @@ export const dictionary = {
       'Πέντε μουσικοί. Λύρα, λαούτο και ούτι, φλάουτο και πνευστά, κρουστά και κοντραμπάσο. Ο καθένας έχει κύριο όργανο και παίζει κι άλλα.',
     musicKicker: 'Ακούστε',
     musicTitle: 'Μουσική',
-    musicLead: 'Ηχογραφήσεις και βίντεο θα αναρτηθούν εδώ.',
+    musicLead:
+      'Δύο δοκιμαστικές ηχογραφήσεις, για μια πρώτη ακρόαση του ήχου της Εσμιγιάς.',
     recordingsLabel: 'Ηχογραφήσεις',
     videosLabel: 'Βίντεο',
     soon: 'Σύντομα',
+    play: 'Αναπαραγωγή',
+    pause: 'Παύση',
+    seek: 'Θέση στο κομμάτι',
+    nowPlaying: 'Παίζει τώρα',
+    audioError: 'Η ηχογράφηση δεν μπόρεσε να φορτώσει.',
     mediaKicker: 'Φωτογραφία',
     mediaTitle: 'Εικόνα',
     mediaCaption: 'Η Εσμιγιά.',
@@ -130,10 +158,15 @@ export const dictionary = {
       'Five musicians. Lyra, laouto and oud, flute and winds, percussion and double bass. Each has a main instrument, and plays others as well.',
     musicKicker: 'Listen',
     musicTitle: 'Music',
-    musicLead: 'Recordings and videos will appear here.',
+    musicLead: 'Two demo recordings, for a first listen to Esmiya’s sound.',
     recordingsLabel: 'Recordings',
     videosLabel: 'Video',
     soon: 'Soon',
+    play: 'Play',
+    pause: 'Pause',
+    seek: 'Seek',
+    nowPlaying: 'Now playing',
+    audioError: 'This recording could not be loaded.',
     mediaKicker: 'Photograph',
     mediaTitle: 'Portrait',
     mediaCaption: 'Esmiya.',

@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
-import { dictionary, members, portrait, type Locale } from '../data/content';
+import MusicPlayer from './MusicPlayer.astro';
+import { dictionary, members, portrait, tracks, type Locale } from '../data/content';
 import '../styles/global.css';
 
 interface Props {
@@ -26,6 +27,12 @@ const jsonLd = {
     '@type': 'Person',
     name: member.name[locale],
     jobTitle: member.role[locale],
+  })),
+  track: tracks.map((track) => ({
+    '@type': 'MusicRecording',
+    name: track.title[locale],
+    url: `https://esmiya.gr${track.src}`,
+    duration: `PT${Math.floor(track.duration / 60)}M${track.duration % 60}S`,
   })),
 };
 ---
@@ -75,16 +82,11 @@ const jsonLd = {
         <p class="kicker">{t.musicKicker}</p>
         <h2>{t.musicTitle}</h2>
         <p class="section-lead">{t.musicLead}</p>
-        <div class="shelf">
-          <article>
-            <h3>{t.recordingsLabel}</h3>
-            <p class="soon">{t.soon}</p>
-          </article>
-          <article>
-            <h3>{t.videosLabel}</h3>
-            <p class="soon">{t.soon}</p>
-          </article>
-        </div>
+        <MusicPlayer locale={locale} t={t} />
+        <p class="video-soon">
+          <span>{t.videosLabel}</span>
+          {t.soon}
+        </p>
       </div>
     </section>
 
@@ -121,7 +123,10 @@ const jsonLd = {
               const role = member.role[locale];
               return (
                 <article class="member-card" data-id={member.id}>
-                  <div class="member-photo">
+                  <div
+                    class="member-photo"
+                    style={member.photoAspect ? `aspect-ratio: ${member.photoAspect}` : undefined}
+                  >
                     {member.image ? (
                       <img src={member.image} alt={`${name}, ${role}`} loading="lazy" />
                     ) : (
