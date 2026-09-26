@@ -58,14 +58,14 @@ export const tracks = [
   {
     id: 'malevizotis',
     src: '/audio/malevizotis.mp3',
-    duration: 986,
+    duration: 216,
     title: { el: 'Μαλεβυζιώτης', en: 'Malevyziotis' },
     note: { el: 'Δοκιμαστική ηχογράφηση', en: 'Demo recording' },
   },
   {
     id: 'protos-syrtos',
     src: '/audio/protos-syrtos.mp3',
-    duration: 986,
+    duration: 460,
     title: {
       el: 'Πρώτος συρτός, Μαδάρες, Λουσακιανός συρτός',
       en: 'Protos syrtos, Madares, Lousakianos syrtos',
