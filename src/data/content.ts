@@ -14,7 +14,7 @@ export const portrait = {
 export const members = [
   {
     id: 'defi',
-    image: '/images/band/members/defi.webp',
+    image: '/images/band/members/defi.webp?v=2',
     role: { el: 'Ντέφι', en: 'Frame drum' },
     name: { el: '', en: '' },
     bio: {

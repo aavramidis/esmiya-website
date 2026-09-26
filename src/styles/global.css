@@ -569,6 +569,10 @@ a {
   object-position: center center;
 }
 
+.member-card[data-id="defi"] .member-photo img {
+  object-position: center 20%;
+}
+
 .member-card h3 {
   margin: 0;
   font-family: var(--serif);
