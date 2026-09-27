@@ -21,7 +21,11 @@ const jsonLd = {
   name: locale === 'el' ? 'Εσμιγιά' : 'Esmiya',
   alternateName: locale === 'el' ? 'Esmiya' : 'Εσμιγιά',
   url: locale === 'el' ? 'https://esmiya.gr/' : 'https://esmiya.gr/en/',
-  genre: locale === 'el' ? 'Κρητική μουσική' : 'Cretan music',
+  genre:
+    locale === 'el'
+      ? ['Κρητική μουσική', 'Σύγχρονη κρητική μουσική', 'Παραδοσιακή κρητική μουσική']
+      : ['Cretan music', 'Contemporary Cretan music', 'Traditional Cretan music'],
+  keywords: t.keywords.join(', '),
   image: 'https://esmiya.gr/images/band/portrait.jpg',
   email: t.email,
   member: members.map((member) => ({
@@ -38,7 +42,7 @@ const jsonLd = {
 };
 ---
 
-<Base locale={locale} title={t.title} description={t.description} canonicalPath={canonicalPath}>
+<Base locale={locale} title={t.title} description={t.description} keywords={t.keywords.join(', ')} canonicalPath={canonicalPath}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
@@ -94,7 +98,9 @@ const jsonLd = {
       <div class="section-inner">
         <p class="kicker">{t.musicKicker}</p>
         <h2>{t.musicTitle}</h2>
-        <p class="section-lead">{t.musicLead}</p>
+        <div class="music-intro">
+          {t.musicIntro.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
         <MusicPlayer locale={locale} t={t} />
         <div class="video-block">
           <h3 class="video-heading">{t.videosLabel}</h3>
@@ -159,6 +165,7 @@ const jsonLd = {
       <div class="section-inner">
         <p class="kicker">{t.contactKicker}</p>
         <h2>{t.contactTitle}</h2>
+        <p class="section-lead">{t.contactBody}</p>
         <p class="section-lead">{t.contactLead}</p>
         <a class="email" href={`mailto:${t.email}`}>{t.email}</a>
       </div>

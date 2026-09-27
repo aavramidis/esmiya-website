@@ -4,10 +4,11 @@ interface Props {
   title: string;
   description: string;
   canonicalPath: string;
+  keywords?: string;
   noindex?: boolean;
 }
 
-const { locale, title, description, canonicalPath, noindex = false } = Astro.props;
+const { locale, title, description, canonicalPath, keywords, noindex = false } = Astro.props;
 const site = 'https://esmiya.gr';
 const canonical = new URL(canonicalPath, site).href;
 const greek = new URL('/', site).href;
@@ -21,6 +22,7 @@ const english = new URL('/en/', site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="el" href={greek} />
     <link rel="alternate" hreflang="en" href={english} />

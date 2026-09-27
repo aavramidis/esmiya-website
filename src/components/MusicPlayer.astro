@@ -29,7 +29,6 @@ const formatTime = (seconds: number) => {
     {
       tracks.map((track) => {
         const title = track.title[locale];
-        const note = track.note[locale];
         return (
           <li class="track" data-track data-title={title} data-src={track.src}>
             <button
@@ -49,9 +48,8 @@ const formatTime = (seconds: number) => {
             <div class="track-body">
               <div class="track-heading">
                 <h3>{title}</h3>
+                <p class="track-blurb">{track.blurb[locale]}</p>
                 <p class="track-note">
-                  {note}
-                  <span aria-hidden="true"> · </span>
                   <span data-duration>{formatTime(track.duration)}</span>
                 </p>
               </div>
