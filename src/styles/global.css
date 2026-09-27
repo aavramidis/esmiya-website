@@ -286,6 +286,24 @@ a {
   color: var(--cream);
 }
 
+.identity-body p {
+  max-width: 42rem;
+  margin: 1.15rem 0 0;
+  color: var(--ink-soft);
+}
+
+.identity-close {
+  margin-top: 2.2rem;
+}
+
+.identity-close p {
+  margin: 0;
+}
+
+.identity-close p + p {
+  margin-top: 0.45rem;
+}
+
 .support,
 .section-lead {
   max-width: 40rem;

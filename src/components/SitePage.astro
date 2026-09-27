@@ -77,6 +77,19 @@ const jsonLd = {
       </div>
     </section>
 
+    <section class="section" id="identity">
+      <div class="section-inner">
+        <p class="kicker">{t.identityKicker}</p>
+        <h2>{t.identityTitle}</h2>
+        <div class="identity-body">
+          {t.identityBody.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <blockquote class="statement identity-close">
+          {t.identityClose.map((line) => <p>{line}</p>)}
+        </blockquote>
+      </div>
+    </section>
+
     <section class="section band-dark" id="music">
       <div class="section-inner">
         <p class="kicker">{t.musicKicker}</p>

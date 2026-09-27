@@ -306,6 +306,18 @@ export const dictionary = {
     aboutTitle: 'Η Εσμιγιά',
     aboutQuote:
       'Η «Εσμιγιά» νοηματοδοτεί συμβολικά τη συνύπαρξη, την ανάγκη των ανθρώπων για συνεύρεση, την επικοινωνία και το σημείο συνάντησης στη δημιουργία ενός νέου μουσικού σχήματος. Με σκοπό τη ψυχαγωγία, πειραματίζονται, στο συγκερασμό των ηχοχρωμάτων, σε νέες συνθέσεις, ανθολογώντας την Κρητική μουσική παράδοση.',
+    identityKicker: 'Η μουσική',
+    identityTitle: 'Η μουσική της Εσμιγιάς',
+    identityBody: [
+      'Η Εσμιγιά ξεκινά από την κρητική μουσική παράδοση, χωρίς να την αντιμετωπίζει ως ένα μουσικό ιδίωμα που πρέπει απλώς να αναπαραχθεί.',
+      'Παραδοσιακοί δρόμοι, ρυθμοί, μελωδίες και ηχοχρώματα αποτελούν την αφετηρία για νέες συνθέσεις και μουσικούς πειραματισμούς. Η λύρα και το λαούτο παραμένουν στον πυρήνα του ήχου, ενώ το φλάουτο, τα μπαντουράκια, τα κρουστά και το κοντραμπάσο, διευρύνουν τον ηχητικό χώρο και δημιουργούν νέες σχέσεις ανάμεσα στη μελωδία, τον ρυθμό και το αρμονικό υπόβαθρο της κάθε μελωδικής φράσης.',
+      'Μας ενδιαφέρει η παράδοση ως ζωντανή μουσική γλώσσα: κάτι που μπορεί να μεταφερθεί, να μετασχηματιστεί και να ξανακουστεί με διαφορετικό τρόπο, χωρίς να χάνει την αναφορά του στην Κρήτη και γενικά από τις ρίζες του, από όποιο μέρος της Ελλάδας κι αν προέρχεται.',
+      'Στις συνθέσεις της Εσμιγιάς συνυπάρχουν η μνήμη της παραδοσιακής μουσικής, η προσωπική έκφραση των μουσικών και η διάθεση για πειραματισμό.',
+    ],
+    identityClose: [
+      'Δεν προσπαθούμε να αναπαραστήσουμε το παρελθόν.',
+      'Προσπαθούμε να συνομιλήσουμε μαζί του.',
+    ],
     musicKicker: 'Ακούστε',
     musicTitle: 'Μουσική',
     musicLead: 'Ηχογραφήσεις',
@@ -364,6 +376,18 @@ export const dictionary = {
     aboutTitle: 'Esmiya',
     aboutQuote:
       '“Esmiya” stands for coexistence, for the need to come together, for communication, and for the meeting point from which a new ensemble is born. They experiment in the blending of timbres and in new compositions, anthologizing the Cretan musical tradition.',
+    identityKicker: 'The music',
+    identityTitle: 'The music of Esmiya',
+    identityBody: [
+      'Esmiya begins in the Cretan musical tradition, and does not treat it as a style that only needs to be reproduced.',
+      'Traditional paths, rhythms, melodies and timbres are the starting point for new compositions and musical experiments. The lyra and the laouto stay at the core of the sound, while the flute, mandourakia, percussion and double bass widen that space and create new relationships between melody, rhythm and the harmonic ground of each phrase.',
+      'What matters is tradition as a living musical language: something that can be carried, transformed and heard again in a different way, while it still refers to Crete — and to roots from whichever part of Greece they come.',
+      'In Esmiya’s compositions, the memory of traditional music, each musician’s own expression, and a willingness to experiment exist together.',
+    ],
+    identityClose: [
+      'We are not trying to reconstruct the past.',
+      'We are trying to be in conversation with it.',
+    ],
     musicKicker: 'Listen',
     musicTitle: 'Music',
     musicLead: 'Recordings',
