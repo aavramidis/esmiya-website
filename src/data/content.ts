@@ -31,17 +31,6 @@ export const galleryPhotos: GalleryPhoto[] = [
     },
   },
   {
-    id: 'lyra-laouto-wall',
-    src: '/images/gallery/lyra-laouto-wall.webp',
-    srcSet: '/images/gallery/lyra-laouto-wall-720.webp 720w, /images/gallery/lyra-laouto-wall.webp 1024w',
-    width: 1024,
-    height: 635,
-    alt: {
-      el: 'Δύο μουσικοί με κρητική λύρα και λαούτο μπροστά σε πέτρινο τοίχο.',
-      en: 'Two musicians with Cretan lyra and laouto in front of a stone wall.',
-    },
-  },
-  {
     id: 'lyra-laouto-outdoor',
     src: '/images/gallery/lyra-laouto-outdoor.webp',
     srcSet:
@@ -51,17 +40,6 @@ export const galleryPhotos: GalleryPhoto[] = [
     alt: {
       el: 'Μουσικοί παίζουν λύρα και λαούτο κάτω από τον ουρανό.',
       en: 'Musicians playing lyra and laouto under open sky.',
-    },
-  },
-  {
-    id: 'percussion',
-    src: '/images/gallery/percussion.webp',
-    srcSet: '/images/gallery/percussion-720.webp 720w, /images/gallery/percussion.webp 682w',
-    width: 682,
-    height: 952,
-    alt: {
-      el: 'Μουσικός με νταούλι και ξύλινα μπακέτες.',
-      en: 'Musician with a frame drum and wooden beaters.',
     },
   },
   {
@@ -76,6 +54,28 @@ export const galleryPhotos: GalleryPhoto[] = [
     },
   },
   {
+    id: 'percussion',
+    src: '/images/gallery/percussion.webp',
+    srcSet: '/images/gallery/percussion-720.webp 720w, /images/gallery/percussion.webp 682w',
+    width: 682,
+    height: 952,
+    alt: {
+      el: 'Μουσικός με νταούλι και ξύλινα μπακέτες.',
+      en: 'Musician with a frame drum and wooden beaters.',
+    },
+  },
+  {
+    id: 'lyra-laouto-wall',
+    src: '/images/gallery/lyra-laouto-wall.webp',
+    srcSet: '/images/gallery/lyra-laouto-wall-720.webp 720w, /images/gallery/lyra-laouto-wall.webp 1024w',
+    width: 1024,
+    height: 635,
+    alt: {
+      el: 'Δύο μουσικοί με κρητική λύρα και λαούτο μπροστά σε πέτρινο τοίχο.',
+      en: 'Two musicians with Cretan lyra and laouto in front of a stone wall.',
+    },
+  },
+  {
     id: 'group-portrait',
     src: '/images/gallery/group-portrait.webp',
     srcSet: '/images/gallery/group-portrait-720.webp 720w, /images/gallery/group-portrait.webp 1024w',
@@ -84,6 +84,128 @@ export const galleryPhotos: GalleryPhoto[] = [
     alt: {
       el: 'Η Εσμιγιά: τέσσερις μουσικοί με λύρα, νταούλι, φλάουτο και λαούτο μπροστά σε πέτρινο τοίχο.',
       en: 'Esmiya: four musicians with lyra, frame drum, flute and laouto in front of a stone wall.',
+    },
+  },
+  {
+    id: 'live-stage-wide',
+    src: '/images/gallery/live-stage-wide.webp',
+    srcSet: '/images/gallery/live-stage-wide-720.webp 720w, /images/gallery/live-stage-wide.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Η Εσμιγιά στη σκηνή: πλήρες σχήμα με κοντραμπάσο, πνευστά, λύρα και λαούτο.',
+      en: 'Esmiya on stage: full line-up with double bass, winds, lyra and laouto.',
+    },
+  },
+  {
+    id: 'live-stage-four',
+    src: '/images/gallery/live-stage-four.webp',
+    srcSet: '/images/gallery/live-stage-four-720.webp 720w, /images/gallery/live-stage-four.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Τέσσερις μουσικοί παίζουν ζωντανά μπροστά σε πέτρινο τοίχο με μπλε φωτισμό.',
+      en: 'Four musicians performing live in front of a blue-lit stone wall.',
+    },
+  },
+  {
+    id: 'live-vocal-flute',
+    src: '/images/gallery/live-vocal-flute.webp',
+    srcSet: '/images/gallery/live-vocal-flute-720.webp 720w, /images/gallery/live-vocal-flute.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Μουσικός τραγουδά στο μικρόφωνο με φλάουτο, απέναντι από κοινό.',
+      en: 'Musician singing at the microphone with a flute, facing the audience.',
+    },
+  },
+  {
+    id: 'live-double-bass',
+    src: '/images/gallery/live-double-bass.webp',
+    srcSet: '/images/gallery/live-double-bass-720.webp 720w, /images/gallery/live-double-bass.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Μουσικός παίζει κοντραμπάσο στη σκηνή, με παρτίτα μπροστά του.',
+      en: 'Musician playing double bass on stage with a music stand.',
+    },
+  },
+  {
+    id: 'live-audience',
+    src: '/images/gallery/live-audience.webp',
+    srcSet: '/images/gallery/live-audience-720.webp 720w, /images/gallery/live-audience.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Άποψη της σκηνής από το κοινό: η Εσμιγιά παίζει ζωντανά.',
+      en: 'View from the audience: Esmiya performing live on stage.',
+    },
+  },
+  {
+    id: 'live-stage-color',
+    src: '/images/gallery/live-stage-color.webp',
+    srcSet: '/images/gallery/live-stage-color-720.webp 720w, /images/gallery/live-stage-color.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Τέσσερις μουσικοί στη σκηνή υπό χρωματιστό φωτισμό.',
+      en: 'Four musicians on stage under colored lighting.',
+    },
+  },
+  {
+    id: 'live-laouto-vocal',
+    src: '/images/gallery/live-laouto-vocal.webp',
+    srcSet:
+      '/images/gallery/live-laouto-vocal-720.webp 720w, /images/gallery/live-laouto-vocal.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Μουσικός παίζει λαούτο και τραγουδά στο μικρόφωνο.',
+      en: 'Musician playing laouto and singing into a microphone.',
+    },
+  },
+  {
+    id: 'live-lyra-smile',
+    src: '/images/gallery/live-lyra-smile.webp',
+    srcSet: '/images/gallery/live-lyra-smile-720.webp 720w, /images/gallery/live-lyra-smile.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Μουσικός με κρητική λύρα τραγουδά στο μικρόφωνο.',
+      en: 'Musician with Cretan lyra singing at the microphone.',
+    },
+  },
+  {
+    id: 'live-winds',
+    src: '/images/gallery/live-winds.webp',
+    srcSet: '/images/gallery/live-winds-720.webp 720w, /images/gallery/live-winds.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Μουσικός παίζει ξύλινο φλάουτο στη σκηνή, δίπλα σε παρτίτα.',
+      en: 'Musician playing a wooden flute on stage beside a music stand.',
+    },
+  },
+  {
+    id: 'live-laouto-close',
+    src: '/images/gallery/live-laouto-close.webp',
+    srcSet: '/images/gallery/live-laouto-close-720.webp 720w, /images/gallery/live-laouto-close.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Κοντινή λήψη μουσικού με λαούτο μπροστά σε μικρόφωνο.',
+      en: 'Close-up of a musician with laouto in front of a microphone.',
+    },
+  },
+  {
+    id: 'live-lyra-vocal',
+    src: '/images/gallery/live-lyra-vocal.webp',
+    srcSet: '/images/gallery/live-lyra-vocal-720.webp 720w, /images/gallery/live-lyra-vocal.webp 1024w',
+    width: 1024,
+    height: 576,
+    alt: {
+      el: 'Μουσικός παίζει λύρα και τραγουδά με κλειστά μάτια.',
+      en: 'Musician playing lyra and singing with eyes closed.',
     },
   },
 ];
