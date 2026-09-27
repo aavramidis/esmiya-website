@@ -306,8 +306,6 @@ export const dictionary = {
     aboutTitle: 'Η Εσμιγιά',
     aboutQuote:
       'Η «Εσμιγιά» νοηματοδοτεί συμβολικά τη συνύπαρξη, την ανάγκη των ανθρώπων για συνεύρεση, την επικοινωνία και το σημείο συνάντησης στη δημιουργία ενός νέου μουσικού σχήματος. Με σκοπό τη ψυχαγωγία, πειραματίζονται, στο συγκερασμό των ηχοχρωμάτων, σε νέες συνθέσεις, ανθολογώντας την Κρητική μουσική παράδοση.',
-    aboutSupport:
-      'Πέντε μουσικοί. Λύρα, λαούτο και ούτι, φλάουτο και πνευστά, κρουστά και κοντραμπάσο.',
     musicKicker: 'Ακούστε',
     musicTitle: 'Μουσική',
     musicLead: 'Ηχογραφήσεις',
@@ -366,8 +364,6 @@ export const dictionary = {
     aboutTitle: 'Esmiya',
     aboutQuote:
       '“Esmiya” stands for coexistence, for the need to come together, for communication, and for the meeting point from which a new ensemble is born. They experiment in the blending of timbres and in new compositions, anthologizing the Cretan musical tradition.',
-    aboutSupport:
-      'Five musicians. Lyra, laouto and oud, flute and winds, percussion and double bass.',
     musicKicker: 'Listen',
     musicTitle: 'Music',
     musicLead: 'Recordings',
