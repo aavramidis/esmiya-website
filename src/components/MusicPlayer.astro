@@ -30,7 +30,7 @@ const formatTime = (seconds: number) => {
       tracks.map((track) => {
         const title = track.title[locale];
         return (
-          <li class="track" data-track data-title={title} data-src={track.src}>
+          <li class="track" id={track.schemaId} data-track data-title={title} data-src={track.src}>
             <button
               class="play-btn"
               type="button"

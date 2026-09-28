@@ -212,6 +212,7 @@ export const galleryPhotos: GalleryPhoto[] = [
 
 export type Member = {
   id: string;
+  schemaId: string;
   image?: string;
   initials?: string;
   photoAspect?: string;
@@ -222,30 +223,35 @@ export type Member = {
 export const members: Member[] = [
   {
     id: 'lyra',
+    schemaId: 'member-manolis-molympakis',
     image: '/images/band/members/laouto-flute.webp?v=22',
     role: { el: 'Κρητική λύρα', en: 'Cretan lyra' },
     name: { el: 'Μανώλης Μολυμπάκης (Μολυμπής)', en: 'Manolis Molybakis (Molybis)' },
   },
   {
     id: 'laouto',
+    schemaId: 'member-avraam-avramidis',
     image: '/images/band/members/laouto.webp?v=2',
     role: { el: 'Κρητικό και στεριανό λαούτο, ούτι', en: 'Cretan and mainland laouto, oud' },
     name: { el: 'Αβραάμ Αβραμίδης', en: 'Avraam Avramidis' },
   },
   {
     id: 'winds',
+    schemaId: 'member-nikos-katritzidakis',
     image: '/images/band/members/winds.webp',
     role: { el: 'Φλάουτο άλτο, πνευστά, μπαντουράκια', en: 'Alto flute, winds, mandourakia' },
     name: { el: 'Νίκος Κατριτζιδάκης', en: 'Nikos Katritzidakis' },
   },
   {
     id: 'percussion',
+    schemaId: 'member-iakovos-molympakis',
     image: '/images/band/members/percussion.webp?v=4',
     role: { el: 'Κρουστά — μπεντίρ, νταουλάκι', en: 'Percussion — bendir, daoulaki' },
     name: { el: 'Ιάκωβος Μολυμπάκης', en: 'Iakovos Molybakis' },
   },
   {
     id: 'bass',
+    schemaId: 'member-nikos-kafetzis',
     image: '/images/band/members/bass.webp',
     role: { el: 'Κοντραμπάσο', en: 'Double bass' },
     name: { el: 'Νίκος Καφετζής', en: 'Nikos Kafetzis' },
@@ -255,6 +261,7 @@ export const members: Member[] = [
 export const tracks = [
   {
     id: 'malevizotis',
+    schemaId: 'recording-malevizotis',
     src: '/audio/malevizotis.mp3',
     duration: 216,
     title: { el: 'Μαλεβυζιώτης', en: 'Malevyziotis' },
@@ -265,8 +272,9 @@ export const tracks = [
   },
   {
     id: 'protos-syrtos',
+    schemaId: 'recording-syrtoi',
     src: '/audio/protos-syrtos.mp3',
-    duration: 460,
+    duration: 459,
     title: {
       el: 'Πρώτος συρτός · Μαδάρες · Λουσακιανός συρτός',
       en: 'Protos syrtos · Madares · Lousakianos syrtos',
@@ -278,10 +286,18 @@ export const tracks = [
   },
 ] as const;
 
-/** https://youtu.be/ZlkKvp1uZso */
+/** https://youtu.be/ZlkKvp1uZso — title from the public YouTube video, hashtags removed. */
 export const featuredVideo = {
+  id: 'video-1',
   youtubeId: 'ZlkKvp1uZso',
-  title: { el: 'Βίντεο της Εσμιγιάς', en: 'Esmiya video' },
+  title: {
+    el: 'Εσμιγιά — Από την άκρη του γιαλού, live στη Μουσική σκηνή 1002 Νύχτες',
+    en: 'Esmiya — Από την άκρη του γιαλού, live at Mousiki Skini 1002 Nychtes',
+  },
+  description: {
+    el: 'Ζωντανή εμφάνιση της Εσμιγιάς στη Μουσική σκηνή 1002 Νύχτες.',
+    en: 'Live performance by Esmiya at Mousiki Skini 1002 Nychtes.',
+  },
 } as const;
 
 export const dictionary = {
@@ -291,17 +307,11 @@ export const dictionary = {
     skip: 'Μετάβαση στο περιεχόμενο',
     title: 'Εσμιγιά — Σύγχρονη κρητική μουσική',
     description:
-      'Η Εσμιγιά: σύγχρονη κρητική μουσική και κρητικό μουσικό συγκρότημα. Νέες συνθέσεις με κρητική λύρα και λαούτο, από την παραδοσιακή κρητική μουσική και τους κρητικούς χορούς.',
-    keywords: [
-      'Κρητική μουσική',
-      'σύγχρονη κρητική μουσική',
-      'κρητικό μουσικό συγκρότημα',
-      'κρητική λύρα και λαούτο',
-      'παραδοσιακή κρητική μουσική',
-      'κρητικοί χοροί',
-      'μουσικό σχήμα Κρήτης',
-      'κρητική μουσική Αθήνα / Κρήτη',
-    ],
+      'Η Εσμιγιά είναι ένα σύγχρονο κρητικό μουσικό σχήμα. Νέες συνθέσεις με λύρα, λαούτο, φλάουτο, κρουστά και κοντραμπάσο, με αφετηρία την κρητική μουσική παράδοση.',
+    siteDescription: 'Επίσημη ιστοσελίδα της Εσμιγιάς.',
+    aboutLead:
+      'Σύγχρονο κρητικό μουσικό σχήμα. Νέες συνθέσεις με λύρα, λαούτο, φλάουτο, κρουστά και κοντραμπάσο, με αφετηρία την κρητική μουσική παράδοση.',
+    genre: ['Κρητική μουσική', 'Σύγχρονη κρητική μουσική'],
     menu: 'Μενού',
     nav: [
       { href: '#about', label: 'Η Εσμιγιά' },
@@ -376,17 +386,11 @@ export const dictionary = {
     skip: 'Skip to content',
     title: 'Esmiya — Contemporary Cretan music',
     description:
-      'Esmiya is a contemporary Cretan music ensemble. New compositions for Cretan lyra and laouto, drawn from traditional Cretan music and Cretan dances.',
-    keywords: [
-      'Cretan music',
-      'contemporary Cretan music',
-      'Cretan music ensemble',
-      'Cretan lyra and laouto',
-      'traditional Cretan music',
-      'Cretan dances',
-      'music ensemble from Crete',
-      'Cretan music Athens / Crete',
-    ],
+      'Esmiya is a contemporary Cretan music ensemble. New compositions for lyra, laouto, flute, percussion and double bass, rooted in the Cretan musical tradition.',
+    siteDescription: 'Official website of Esmiya.',
+    aboutLead:
+      'A contemporary Cretan music ensemble. New compositions for lyra, laouto, flute, percussion and double bass, rooted in the Cretan musical tradition.',
+    genre: ['Cretan music', 'Contemporary Cretan music'],
     menu: 'Menu',
     nav: [
       { href: '#about', label: 'The band' },
@@ -443,7 +447,7 @@ export const dictionary = {
     galleryStatusLabel: 'Gallery position',
     galleryStatusTemplate: 'Photo {n} of {total}',
     membersKicker: 'The musicians',
-    membersTitle: 'Line-up',
+    membersTitle: 'Musicians',
     contactKicker: 'Contact',
     contactTitle: 'Contact',
     contactBody: 'Esmiya presents its musical program in concerts, festivals, cultural events, and venues that host live music.',

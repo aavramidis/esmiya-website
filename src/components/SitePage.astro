@@ -4,7 +4,8 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import GalleryCarousel from './GalleryCarousel.astro';
 import MusicPlayer from './MusicPlayer.astro';
-import { dictionary, featuredVideo, members, portrait, tracks, type Locale } from '../data/content';
+import { dictionary, featuredVideo, members, portrait, type Locale } from '../data/content';
+import { structuredData } from '../data/schema';
 import '../styles/global.css';
 
 interface Props {
@@ -15,36 +16,12 @@ const { locale } = Astro.props;
 const t = dictionary[locale];
 const canonicalPath = locale === 'el' ? '/' : '/en/';
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'MusicGroup',
-  name: locale === 'el' ? 'Εσμιγιά' : 'Esmiya',
-  alternateName: locale === 'el' ? 'Esmiya' : 'Εσμιγιά',
-  url: locale === 'el' ? 'https://esmiya.gr/' : 'https://esmiya.gr/en/',
-  genre:
-    locale === 'el'
-      ? ['Κρητική μουσική', 'Σύγχρονη κρητική μουσική', 'Παραδοσιακή κρητική μουσική']
-      : ['Cretan music', 'Contemporary Cretan music', 'Traditional Cretan music'],
-  keywords: t.keywords.join(', '),
-  image: 'https://esmiya.gr/images/band/portrait.jpg',
-  email: t.email,
-  member: members.map((member) => ({
-    '@type': 'Person',
-    name: member.name[locale],
-    jobTitle: member.role[locale],
-  })),
-  track: tracks.map((track) => ({
-    '@type': 'MusicRecording',
-    name: track.title[locale],
-    url: `https://esmiya.gr${track.src}`,
-    duration: `PT${Math.floor(track.duration / 60)}M${track.duration % 60}S`,
-  })),
-};
+const jsonLd = JSON.stringify(structuredData(locale)).replace(/</g, '\\u003c');
 ---
 
-<Base locale={locale} title={t.title} description={t.description} keywords={t.keywords.join(', ')} canonicalPath={canonicalPath}>
+<Base locale={locale} title={t.title} description={t.description} canonicalPath={canonicalPath}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={jsonLd} />
   </Fragment>
   <Header locale={locale} t={t} />
   <main id="main">
@@ -77,6 +54,7 @@ const jsonLd = {
       <div class="section-inner">
         <p class="kicker">{t.aboutKicker}</p>
         <h2>{t.aboutTitle}</h2>
+        <p class="section-lead">{t.aboutLead}</p>
         <blockquote class="statement">{t.aboutQuote}</blockquote>
       </div>
     </section>
@@ -102,7 +80,7 @@ const jsonLd = {
           {t.musicIntro.map((paragraph) => <p>{paragraph}</p>)}
         </div>
         <MusicPlayer locale={locale} t={t} />
-        <div class="video-block">
+        <div class="video-block" id={featuredVideo.id}>
           <h3 class="video-heading">{t.videosLabel}</h3>
           <div class="video-frame">
             <iframe
@@ -114,6 +92,7 @@ const jsonLd = {
               referrerpolicy="strict-origin-when-cross-origin"
             />
           </div>
+          <p class="video-caption">{featuredVideo.title[locale]}</p>
         </div>
       </div>
     </section>
@@ -136,13 +115,17 @@ const jsonLd = {
               const name = member.name[locale];
               const role = member.role[locale];
               return (
-                <article class="member-card" data-id={member.id}>
+                <article class="member-card" id={member.schemaId} data-id={member.id}>
                   <div
                     class="member-photo"
                     style={member.photoAspect ? `aspect-ratio: ${member.photoAspect}` : undefined}
                   >
                     {member.image ? (
-                      <img src={member.image} alt={`${name}, ${role}`} loading="lazy" />
+                      <img
+                        src={member.image}
+                        alt={locale === 'el' ? `${name} της Εσμιγιάς, ${role}` : `${name} of Esmiya, ${role}`}
+                        loading="lazy"
+                      />
                     ) : (
                       <div class="member-photo-empty" aria-hidden="true">
                         <span>{member.initials}</span>
