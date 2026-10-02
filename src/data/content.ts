@@ -229,18 +229,18 @@ export const members: Member[] = [
     name: { el: 'Μανώλης Μολυμπάκης (Μολυμπής)', en: 'Manolis Molybakis (Molybis)' },
   },
   {
-    id: 'laouto',
-    schemaId: 'member-avraam-avramidis',
-    image: '/images/band/members/laouto.webp?v=2',
-    role: { el: 'Κρητικό και στεριανό λαούτο, ούτι', en: 'Cretan and mainland laouto, oud' },
-    name: { el: 'Αβραάμ Αβραμίδης', en: 'Avraam Avramidis' },
-  },
-  {
     id: 'winds',
     schemaId: 'member-nikos-katritzidakis',
     image: '/images/band/members/winds.webp',
     role: { el: 'Φλάουτο άλτο, πνευστά, μπαντουράκια', en: 'Alto flute, winds, mandourakia' },
     name: { el: 'Νίκος Κατριτζιδάκης', en: 'Nikos Katritzidakis' },
+  },
+  {
+    id: 'laouto',
+    schemaId: 'member-avraam-avramidis',
+    image: '/images/band/members/laouto.webp?v=2',
+    role: { el: 'Κρητικό και στεριανό λαούτο, ούτι', en: 'Cretan and mainland laouto, oud' },
+    name: { el: 'Αβραάμ Αβραμίδης', en: 'Avraam Avramidis' },
   },
   {
     id: 'percussion',
