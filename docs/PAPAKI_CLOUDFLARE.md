@@ -8,18 +8,18 @@ Papaki mail-on-Cloudflare DNS, if you add a mailbox later: [Connect your email w
 
 ## Status
 
-Phases A–D were completed on 27 Sep 2026 and checked the same night. Phases E and F are not done.
+Phases A–F are done. Google has read the sitemap.
 
 | Phase | State |
 | ----- | ----- |
-| A — Domains on Cloudflare | Done. `esmiya.gr`, `esmigia.gr`, and `esmiyia.gr` are **Active**. Nameservers are `aaron.ns.cloudflare.com` and `diana.ns.cloudflare.com`. |
-| B — Pages | Done. Project `esmiya`, production branch `main`. |
-| C — `esmiya.gr` and `www` | Done. `https://esmiya.gr/` and `https://esmiya.gr/en/` return 200. `www` returns 301 to the apex and keeps the path. |
-| D — `esmigia.gr` and `esmiyia.gr` | Done. Apex and `www` return 301 to `https://esmiya.gr` and keep the path, including `/en/`. |
-| E — `info@esmiya.gr` | Not started. The address is on the page and does not receive mail yet. |
-| F — Search Console | Not started. |
+| A — Domains on Cloudflare | Done (27 Sep 2026). `esmiya.gr`, `esmigia.gr`, and `esmiyia.gr` are **Active**. Nameservers are `aaron.ns.cloudflare.com` and `diana.ns.cloudflare.com`. |
+| B — Pages | Done (27 Sep 2026). Project `esmiya`, production branch `main`. |
+| C — `esmiya.gr` and `www` | Done (27 Sep 2026). `https://esmiya.gr/` and `https://esmiya.gr/en/` return 200. `www` returns 301 to the apex and keeps the path. |
+| D — `esmigia.gr` and `esmiyia.gr` | Done (27 Sep 2026). Apex and `www` return 301 to `https://esmiya.gr` and keep the path, including `/en/`. |
+| E — `info@esmiya.gr` | Done (12 Oct 2026). Papaki mailbox. Send and receive both work. Mail DNS, including DMARC (`p=none`), is on the **`esmiya.gr`** zone only. |
+| F — Search Console | Done (12 Oct 2026). Domain property `esmiya.gr` is verified. Sitemap status is **Success**. Google discovered 2 pages. |
 
-The steps in A–D are the record of what was done. E and F are still to do.
+The steps below are the record of what was done.
 
 ---
 
@@ -31,7 +31,7 @@ The steps in A–D are the record of what was done. E and F are still to do.
 | **Registrar**           | Papaki                    | You **own** `esmiya.gr`, `esmigia.gr`, and `esmiyia.gr` (pay / renew here) |
 | **DNS**                 | Cloudflare                | After the nameserver change, records are edited **only** in Cloudflare     |
 | **Website**             | Cloudflare **Pages**      | Builds this repo from GitHub `main` and serves `dist/`                     |
-| **Mailbox** (optional)  | Papaki (`info@esmiya.gr`) | Only if you want the address on the contact section to receive mail        |
+| **Mailbox**             | Papaki (`info@esmiya.gr`) | The live inbox. One mailbox, included with the domain registration         |
 | **Mail DNS** (optional) | Cloudflare                | MX / SPF / DKIM / DMARC from Papaki, entered in the `esmiya.gr` zone       |
 
 
@@ -60,7 +60,7 @@ Use the **same Cloudflare account** as ReperDo.
 | Root directory       | `website`                            | `/` (repo root)                                      |
 | Canonical host       | `reperdo.com`                        | `esmiya.gr`                                          |
 | Extra domains        | `reperdo.gr` → `.com`                | `esmigia.gr` and `esmiyia.gr` → `esmiya.gr`          |
-| Support mail         | `support@reperdo.com`                | `info@esmiya.gr` is on the page; mailbox is optional |
+| Support mail         | `support@reperdo.com`                | `info@esmiya.gr` (Papaki mailbox, DNS on `esmiya.gr`) |
 
 
 ---
@@ -295,11 +295,11 @@ These zones can take a few extra minutes on some ISPs. Same local-cache flush as
 
 
 
-## Phase E — `info@esmiya.gr` (optional)
+## Phase E — `info@esmiya.gr`
 
-The contact section already shows `info@esmiya.gr`. Until this phase is done, that address does not receive mail. Skip this whole phase if you only need the website.
+**Done** (12 Oct 2026). `info@esmiya.gr` sends and receives. The mailbox was created on 10 Oct 2026 in Papaki Email Manager (`mail.controlpanel.pro`), on the one slot included with the domain registration (`0 used / 1 total` before create).
 
-**Do not** enable **Cloudflare Email Routing** on `esmiya.gr` if you use Papaki mail. Routing and Papaki mail both want MX, and they conflict. ReperDo uses Papaki’s mailbox, not Email Routing.
+**Do not** enable **Cloudflare Email Routing** on `esmiya.gr`. Routing and Papaki mail both want MX, and they conflict. ReperDo uses Papaki’s mailbox, not Email Routing.
 
 ### E1 — Create the mailbox
 
@@ -314,72 +314,68 @@ MX is not listed under mailbox **ACTIONS**. Use Papaki’s [external DNS article
 
 All mail records: **DNS only** (grey cloud). The website records that point at Pages stay **proxied** (orange).
 
-These are the values that worked for ReperDo in August 2026. If Papaki’s panel shows different strings, use **Papaki’s exact values**.
+These are the values Papaki showed and that are in the `esmiya.gr` zone. The SPF string is Papaki’s shorter form. The ReperDo guide used `v=spf1 a mx include:spf.webapps.net ~all`; do not “correct” the live record unless Papaki’s panel changes.
 
 
-| Type  | Name                     | Content                                    | Priority | Proxy    |
-| ----- | ------------------------ | ------------------------------------------ | -------- | -------- |
-| MX    | `@`                      | `mail-gr.securemail.pro`                   | 10       | DNS only |
-| TXT   | `@`                      | `v=spf1 a mx include:spf.webapps.net ~all` | —        | DNS only |
-| CNAME | `key-paki001._domainkey` | `key-paki001._domainkey.securemail.pro`    | —        | DNS only |
-| CNAME | `key-paki002._domainkey` | `key-paki002._domainkey.securemail.pro`    | —        | DNS only |
+| Type  | Name                     | Content                                 | Priority | Proxy    |
+| ----- | ------------------------ | --------------------------------------- | -------- | -------- |
+| MX    | `@`                      | `mail-gr.securemail.pro`                | 10       | DNS only |
+| TXT   | `@`                      | `v=spf1 include:spf.webapps.net ~all`   | —        | DNS only |
+| CNAME | `key-paki001._domainkey` | `key-paki001._domainkey.securemail.pro` | —        | DNS only |
+| CNAME | `key-paki002._domainkey` | `key-paki002._domainkey.securemail.pro` | —        | DNS only |
 
 
-There will be two TXT records on `@` if you also add DMARC later: SPF on `@`, DMARC on `_dmarc`. Do not put mail records on `esmigia.gr` or `esmiyia.gr`. Those names only redirect.
+In the CNAME **Name** field, leave off `.esmiya.gr`. Cloudflare adds the domain. Pasting the full name from Papaki’s DKIM dialog (`key-paki001._domainkey.esmiya.gr`) can become `key-paki001._domainkey.esmiya.gr.esmiya.gr`.
 
-Papaki’s SPF popup may omit `a mx`. Prefer the form above unless Papaki’s current article shows a newer string.
+Do not put these four records on `esmigia.gr` or `esmiyia.gr`. Those names only redirect. The first attempt put them on **`esmiyia.gr`**. Sending still worked, because Outlook talks straight to `smtp-gr.securemail.pro`. Receiving did not: other servers look up MX for `esmiya.gr`, found none, and queued the message for hours with no immediate bounce. The four mail records were then removed from `esmiyia.gr` and kept only on `esmiya.gr`. After that, send and receive both worked.
 
-Wait 15–60 minutes.
-
-### E3 — Test
-
-1. Papaki **webmail** → log in as `info@esmiya.gr`.
-2. Send **to** `info@esmiya.gr` from a personal account.
-3. Send **from** webmail to a personal account. **From:** should be `info@esmiya.gr`.
-4. Check spam on the first test.
+Check the zone name at the top of the Cloudflare DNS page before saving. `esmiya` and `esmiyia` are easy to mix up.
 
 ```bash
 dig esmiya.gr MX +short @1.1.1.1
 # expect: 10 mail-gr.securemail.pro.
+dig esmiyia.gr MX +short @1.1.1.1
+# expect: empty
 ```
 
+### E3 — Test
+
+Confirmed 12 Oct 2026: a message sent from `info@esmiya.gr` arrived, and a message sent to that address arrived.
+
+1. Papaki **webmail** or Outlook → log in as `info@esmiya.gr`.
+2. Send **to** `info@esmiya.gr` from a personal account.
+3. Send **from** `info@esmiya.gr` to a personal account. **From:** should be `info@esmiya.gr`.
+4. Check spam on the first test.
 
 
-### E4 — DMARC (monitoring)
 
-Papaki **ACTIONS → DMARC → CREATE** often does not write a record when DNS is on Cloudflare. Add the TXT yourself.
+### E4 — DMARC
 
-Start with `p=none` (monitor only). Do not start with quarantine or reject.
+**Done** (12 Oct 2026). Live record:
 
-Cloudflare → `esmiya.gr` → **DNS → Add record**:
+| Type | Name | Content | Proxy |
+| ---- | ---- | ------- | ----- |
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:info@esmiya.gr` | DNS only |
 
+`p=none` only asks other servers to report spoofed mail. It does not quarantine or reject anything. Reports, when they arrive, come to `info@esmiya.gr`. Leave the policy at `p=none` unless those reports later show a problem.
 
-| Type | Name     | Content                                                  | Proxy    |
-| ---- | -------- | -------------------------------------------------------- | -------- |
-| TXT  | `_dmarc` | `v=DMARC1; p=none; rua=mailto:YOUR_PERSONAL@example.com` | DNS only |
+Papaki **ACTIONS → DMARC → CREATE** does not write this record when DNS is on Cloudflare. It was added in the `esmiya.gr` zone directly. The quotes Cloudflare shows around the TXT value are display only.
 
+### Outlook / Apple Mail / iOS (IMAP)
 
-Use a real inbox you read for the reports. Do not commit that address into git if you would rather keep it private; the DNS record is enough.
+The account was added in Outlook on 10 Oct 2026. Official Mac steps: [How do I set up my email on a MAC?](https://support.papaki.com/help/how-do-i-set-up-my-email-on-a-mac/?lang=en)
 
-```bash
-dig _dmarc.esmiya.gr TXT +short @1.1.1.1
-```
-
-Move to `quarantine` later only if the reports look clean.
-
-### Apple Mail / iOS (IMAP)
-
-Official: [How do I set up my email on a MAC?](https://support.papaki.com/help/how-do-i-set-up-my-email-on-a-mac/?lang=en)
+Outlook does not fill in the server names. Type them. Username is the full address, and the password is the Papaki mailbox password, in both the IMAP and SMTP password fields.
 
 
-| Setting          | Value                                             |
-| ---------------- | ------------------------------------------------- |
-| Email / username | `info@esmiya.gr` (full address)                   |
-| Password         | Papaki mailbox password                           |
-| Type             | **IMAP** (not POP)                                |
-| Incoming         | `mail-gr.securemail.pro` · port **993** · SSL/TLS |
-| Outgoing         | `smtp-gr.securemail.pro` · port **465** · SSL/TLS |
-| SMTP auth        | Same username + password                          |
+| Setting              | Value                                             |
+| -------------------- | ------------------------------------------------- |
+| Email / username     | `info@esmiya.gr` (full address)                   |
+| Password             | Papaki mailbox password                           |
+| Type                 | **IMAP** (not POP)                                |
+| Incoming             | `mail-gr.securemail.pro` · port **993** · SSL/TLS |
+| Outgoing             | `smtp-gr.securemail.pro` · port **465** · SSL/TLS |
+| SMTP auth            | Same username + password                          |
 
 
 If SMTP 465 fails, try **587** with STARTTLS. iPhone: **Settings → Mail → Accounts → Other**.
@@ -388,12 +384,25 @@ If SMTP 465 fails, try **587** with STARTTLS. iPhone: **Settings → Mail → Ac
 
 
 
-## Phase F — Search Console (after the site answers on HTTPS)
+## Phase F — Search Console
 
-1. [Google Search Console](https://search.google.com/search-console) → add property `https://esmiya.gr/`.
-2. Verify with the DNS TXT record Google gives you, added in the `esmiya.gr` Cloudflare zone (DNS only).
-3. Submit `https://esmiya.gr/sitemap.xml`.
-4. You do not need separate properties for `esmigia.gr` and `esmiyia.gr` if they 301 to the canonical host. An optional URL-prefix property for `https://esmiya.gr/en/` is enough if you want to watch the English page on its own.
+**Done** (12 Oct 2026). [Google Search Console](https://search.google.com/search-console) has a **domain** property for `esmiya.gr`. Ownership was verified with the DNS TXT record Google provided, added in the `esmiya.gr` Cloudflare zone (DNS only).
+
+This is a domain property, not a single URL prefix. In **Sitemaps**, the address must be the full URL:
+
+```text
+https://esmiya.gr/sitemap.xml
+```
+
+Entering only `sitemap.xml` is rejected with **Invalid sitemap address**.
+
+The sitemap was submitted once. The first status was **Couldn't fetch**. It was left in place, and the same day Google read it successfully: status **Success**, last read 12 Oct 2026, **2** discovered pages (the Greek homepage and `/en/`), 0 videos. A second submission was not required.
+
+Overview can still say **Processing data, please check again in a day or so**. That is the search-performance report, not the sitemap. Indexing of the two pages can lag the successful read.
+
+A browser with Dark Reader shows the sitemap as one broken line of CSS. That is the extension. **View Page Source** shows the real XML.
+
+No separate properties for `esmigia.gr`, `esmiyia.gr`, or `/en/`. Those names redirect, or they are already listed in the sitemap.
 
 ---
 
@@ -408,7 +417,8 @@ If SMTP 465 fails, try **587** with STARTTLS. iPhone: **Settings → Mail → Ac
 | See deploy status      | Cloudflare Pages → **Deployments**                           |
 | Change DNS             | Cloudflare zone (`esmiya.gr`, `esmigia.gr`, or `esmiyia.gr`) |
 | Renew domains          | Papaki                                                       |
-| Read / send `info@`    | Papaki webmail or Mail, after Phase E                        |
+| Read / send `info@`    | Papaki webmail or Outlook (`info@esmiya.gr`)                 |
+| Search indexing        | Google Search Console, property `esmiya.gr`                  |
 | Local preview          | `npm run dev`                                                |
 
 
@@ -427,7 +437,8 @@ If SMTP 465 fails, try **587** with STARTTLS. iPhone: **Settings → Mail → Ac
 7. **Do not attach** `esmigia.gr` **/** `esmiyia.gr` **as Pages custom domains.** The redirect rule in each of those zones is what sends people to `esmiya.gr`.
 8. **Do not redirect the apex** `esmiya.gr`**.** Only `www` on that zone.
 9. **Papaki mail and Cloudflare Email Routing cannot both own MX.** Pick Papaki.
-10. **Mail records: grey cloud. Site records: orange cloud.**
+10. **Mail records: grey cloud. Site records: orange cloud.** Mail records belong on the `esmiya.gr` zone only. `esmiyia.gr` is a redirect, and a record saved there does not deliver mail to `info@esmiya.gr`. Sending can still work, because the mail app talks to Papaki directly.
 11. **DMARC “CREATE” in Papaki** may show nothing. Add `_dmarc` in Cloudflare.
 12. **Pages deploys GitHub** `main`, not unsaved editor buffers.
+13. **Search Console domain property: submit the full sitemap URL.** `sitemap.xml` alone is invalid. One submission is enough. **Couldn't fetch** can clear on its own; it did, later the same day.
 
