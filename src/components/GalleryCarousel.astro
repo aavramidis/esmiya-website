@@ -9,6 +9,11 @@ interface Props {
 const { locale, t } = Astro.props;
 const total = galleryPhotos.length;
 const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{total}', String(total));
+const filters = [
+  { id: 'all', label: t.galleryAll },
+  { id: 'stage', label: t.galleryStage },
+  { id: 'musicians', label: t.galleryMusicians },
+] as const;
 ---
 
 <div
@@ -19,6 +24,20 @@ const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{tota
   data-next-label={t.galleryNext}
   data-status-template={t.galleryStatusTemplate}
 >
+  <div class="gallery-filters" role="group" aria-label={t.mediaTitle}>
+    {
+      filters.map((filter, index) => (
+        <button
+          class="gallery-filter"
+          type="button"
+          data-filter={filter.id}
+          aria-pressed={index === 0 ? 'true' : 'false'}
+        >
+          {filter.label}
+        </button>
+      ))
+    }
+  </div>
   <div class="gallery-viewport">
     <button
       class="gallery-nav gallery-nav-prev"
@@ -38,6 +57,7 @@ const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{tota
             class:list={['gallery-slide', index === 0 && 'is-active']}
             data-slide
             data-index={index}
+            data-group={photo.group}
             aria-hidden={index === 0 ? 'false' : 'true'}
           >
             <figure class="gallery-frame">
@@ -81,29 +101,45 @@ const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{tota
     const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-next]');
     const status = root.querySelector<HTMLElement>('[data-gallery-status]');
+    const filterButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-filter]'));
     const prevLabel = root.dataset.prevLabel ?? 'Previous photo';
     const nextLabel = root.dataset.nextLabel ?? 'Next photo';
     const statusTemplate = root.dataset.statusTemplate ?? '{n} / {total}';
-    const total = slides.length;
-    if (!prev || !next || total === 0) return;
+    if (!prev || !next || slides.length === 0) return;
 
-    let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
-    if (index < 0) index = 0;
+    let filter = 'all';
+    let index = 0;
 
-    const formatStatus = (current: number) =>
+    const visibleSlides = () =>
+      slides.filter((slide) => filter === 'all' || slide.dataset.group === filter);
+
+    const formatStatus = (current: number, total: number) =>
       statusTemplate.replace('{n}', String(current)).replace('{total}', String(total));
 
     const setSlide = (nextIndex: number) => {
-      index = (nextIndex + total) % total;
-      slides.forEach((slide, i) => {
-        const active = i === index;
+      const visible = visibleSlides();
+      const total = visible.length;
+      if (total === 0) return;
+      index = ((nextIndex % total) + total) % total;
+      slides.forEach((slide) => {
+        const shown = visible.includes(slide);
+        const active = shown && slide === visible[index];
+        slide.hidden = !shown;
         slide.classList.toggle('is-active', active);
         slide.setAttribute('aria-hidden', String(!active));
       });
-      if (status) status.textContent = formatStatus(index + 1);
+      if (status) status.textContent = formatStatus(index + 1, total);
       const disabled = total <= 1;
       prev.disabled = disabled;
       next.disabled = disabled;
+    };
+
+    const setFilter = (nextFilter: string) => {
+      filter = nextFilter;
+      filterButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
+      });
+      setSlide(0);
     };
 
     prev.setAttribute('aria-label', prevLabel);
@@ -111,8 +147,12 @@ const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{tota
 
     prev.addEventListener('click', () => setSlide(index - 1));
     next.addEventListener('click', () => setSlide(index + 1));
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => setFilter(button.dataset.filter ?? 'all'));
+    });
 
     root.addEventListener('keydown', (event) => {
+      if (event.target instanceof HTMLButtonElement && event.target.dataset.filter) return;
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
         setSlide(index - 1);
@@ -123,6 +163,6 @@ const initialStatus = t.galleryStatusTemplate.replace('{n}', '1').replace('{tota
       }
     });
 
-    setSlide(index);
+    setSlide(0);
   });
 </script>

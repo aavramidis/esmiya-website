@@ -1,4 +1,4 @@
-import { dictionary, featuredVideo, members, tracks, type Locale } from './content';
+import { dictionary, featuredVideo, instruments, members, tracks, type Locale } from './content';
 
 const site = 'https://esmiya.gr';
 const groupId = `${site}/#musicgroup`;
@@ -81,6 +81,7 @@ export const structuredData = (locale: Locale) => {
         url: `${site}/`,
         description: t.aboutLead,
         genre: t.genre,
+        instrument: instruments.map((instrument) => instrument.name[locale]),
         image: [`${site}/images/band/portrait.jpg`],
         email: t.email,
         member: members.map((member) => ({ '@id': `${site}/#${member.schemaId}` })),

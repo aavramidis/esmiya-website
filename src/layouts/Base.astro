@@ -4,11 +4,13 @@ interface Props {
   title: string;
   description: string;
   canonicalPath: string;
+  imageAlt?: string;
   noindex?: boolean;
 }
 
-const { locale, title, description, canonicalPath, noindex = false } = Astro.props;
+const { locale, title, description, canonicalPath, imageAlt, noindex = false } = Astro.props;
 const site = 'https://esmiya.gr';
+const socialImage = `${site}/images/band/portrait.jpg`;
 const canonical = new URL(canonicalPath, site).href;
 const greek = new URL('/', site).href;
 const english = new URL('/en/', site).href;
@@ -34,9 +36,15 @@ const english = new URL('/en/', site).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${site}/images/band/portrait.jpg`} />
+    <meta property="og:image" content={socialImage} />
+    {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
     <meta property="og:locale" content={locale === 'el' ? 'el_GR' : 'en_US'} />
     <meta property="og:locale:alternate" content={locale === 'el' ? 'en_US' : 'el_GR'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

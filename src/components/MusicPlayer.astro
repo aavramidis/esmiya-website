@@ -48,10 +48,12 @@ const formatTime = (seconds: number) => {
             <div class="track-body">
               <div class="track-heading">
                 <h3>{title}</h3>
-                <p class="track-blurb">{track.blurb[locale]}</p>
-                <p class="track-note">
+                <p class="track-kind">
+                  {track.kind[locale]}
+                  <span aria-hidden="true"> · </span>
                   <span data-duration>{formatTime(track.duration)}</span>
                 </p>
+                <p class="track-blurb">{track.blurb[locale]}</p>
               </div>
               <div class="track-controls">
                 <span class="time" data-current>

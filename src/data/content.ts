@@ -7,6 +7,8 @@ export const portrait = {
   height: 2000,
 };
 
+export type GalleryGroup = 'stage' | 'musicians';
+
 export type GalleryPhoto = {
   id: string;
   src: string;
@@ -14,6 +16,7 @@ export type GalleryPhoto = {
   width: number;
   height: number;
   featured?: boolean;
+  group: GalleryGroup;
   alt: { el: string; en: string };
 };
 
@@ -25,6 +28,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     width: 1024,
     height: 624,
     featured: true,
+    group: 'musicians',
     alt: {
       el: 'Η Εσμιγιά σε εξωτερικό χώρο: τέσσερις μουσικοί με παραδοσιακά όργανα.',
       en: 'Esmiya outdoors: four musicians with traditional instruments.',
@@ -37,6 +41,7 @@ export const galleryPhotos: GalleryPhoto[] = [
       '/images/gallery/lyra-laouto-outdoor-720.webp 720w, /images/gallery/lyra-laouto-outdoor.webp 1024w',
     width: 1024,
     height: 624,
+    group: 'musicians',
     alt: {
       el: 'Μουσικοί παίζουν λύρα και λαούτο κάτω από τον ουρανό.',
       en: 'Musicians playing lyra and laouto under open sky.',
@@ -48,6 +53,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/flute-720.webp 720w, /images/gallery/flute.webp 682w',
     width: 682,
     height: 952,
+    group: 'musicians',
     alt: {
       el: 'Μουσικός παίζει ξύλινο φλάουτο μπροστά σε πέτρινο τοίχο.',
       en: 'Musician playing a wooden flute in front of a stone wall.',
@@ -59,6 +65,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/percussion-720.webp 720w, /images/gallery/percussion.webp 682w',
     width: 682,
     height: 952,
+    group: 'musicians',
     alt: {
       el: 'Μουσικός με νταούλι και ξύλινα μπακέτες.',
       en: 'Musician with a frame drum and wooden beaters.',
@@ -70,6 +77,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/lyra-laouto-wall-720.webp 720w, /images/gallery/lyra-laouto-wall.webp 1024w',
     width: 1024,
     height: 635,
+    group: 'musicians',
     alt: {
       el: 'Δύο μουσικοί με κρητική λύρα και λαούτο μπροστά σε πέτρινο τοίχο.',
       en: 'Two musicians with Cretan lyra and laouto in front of a stone wall.',
@@ -81,6 +89,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/group-portrait-720.webp 720w, /images/gallery/group-portrait.webp 1024w',
     width: 1024,
     height: 962,
+    group: 'musicians',
     alt: {
       el: 'Η Εσμιγιά: τέσσερις μουσικοί με λύρα, νταούλι, φλάουτο και λαούτο μπροστά σε πέτρινο τοίχο.',
       en: 'Esmiya: four musicians with lyra, frame drum, flute and laouto in front of a stone wall.',
@@ -92,6 +101,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-stage-wide-720.webp 720w, /images/gallery/live-stage-wide.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Η Εσμιγιά στη σκηνή: πλήρες σχήμα με κοντραμπάσο, πνευστά, λύρα και λαούτο.',
       en: 'Esmiya on stage: full line-up with double bass, winds, lyra and laouto.',
@@ -103,6 +113,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-stage-four-720.webp 720w, /images/gallery/live-stage-four.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Τέσσερις μουσικοί παίζουν ζωντανά μπροστά σε πέτρινο τοίχο με μπλε φωτισμό.',
       en: 'Four musicians performing live in front of a blue-lit stone wall.',
@@ -114,6 +125,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-vocal-flute-720.webp 720w, /images/gallery/live-vocal-flute.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Μουσικός τραγουδά στο μικρόφωνο με φλάουτο, απέναντι από κοινό.',
       en: 'Musician singing at the microphone with a flute, facing the audience.',
@@ -125,6 +137,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-double-bass-720.webp 720w, /images/gallery/live-double-bass.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Μουσικός παίζει κοντραμπάσο στη σκηνή, με παρτίτα μπροστά του.',
       en: 'Musician playing double bass on stage with a music stand.',
@@ -136,6 +149,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-audience-720.webp 720w, /images/gallery/live-audience.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Άποψη της σκηνής από το κοινό: η Εσμιγιά παίζει ζωντανά.',
       en: 'View from the audience: Esmiya performing live on stage.',
@@ -147,6 +161,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-stage-color-720.webp 720w, /images/gallery/live-stage-color.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Τέσσερις μουσικοί στη σκηνή υπό χρωματιστό φωτισμό.',
       en: 'Four musicians on stage under colored lighting.',
@@ -159,6 +174,7 @@ export const galleryPhotos: GalleryPhoto[] = [
       '/images/gallery/live-laouto-vocal-720.webp 720w, /images/gallery/live-laouto-vocal.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Μουσικός παίζει λαούτο και τραγουδά στο μικρόφωνο.',
       en: 'Musician playing laouto and singing into a microphone.',
@@ -170,6 +186,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-lyra-smile-720.webp 720w, /images/gallery/live-lyra-smile.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Μουσικός με κρητική λύρα τραγουδά στο μικρόφωνο.',
       en: 'Musician with Cretan lyra singing at the microphone.',
@@ -181,6 +198,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-winds-720.webp 720w, /images/gallery/live-winds.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Μουσικός παίζει ξύλινο φλάουτο στη σκηνή, δίπλα σε παρτίτα.',
       en: 'Musician playing a wooden flute on stage beside a music stand.',
@@ -192,6 +210,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-laouto-close-720.webp 720w, /images/gallery/live-laouto-close.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Κοντινή λήψη μουσικού με λαούτο μπροστά σε μικρόφωνο.',
       en: 'Close-up of a musician with laouto in front of a microphone.',
@@ -203,6 +222,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     srcSet: '/images/gallery/live-lyra-vocal-720.webp 720w, /images/gallery/live-lyra-vocal.webp 1024w',
     width: 1024,
     height: 576,
+    group: 'stage',
     alt: {
       el: 'Μουσικός παίζει λύρα και τραγουδά με κλειστά μάτια.',
       en: 'Musician playing lyra and singing with eyes closed.',
@@ -264,6 +284,7 @@ export const tracks = [
     schemaId: 'recording-malevizotis',
     src: '/audio/malevizotis.mp3',
     duration: 216,
+    kind: { el: 'Κρητικός χορός', en: 'Cretan dance' },
     title: { el: 'Μαλεβυζιώτης', en: 'Malevyziotis' },
     blurb: {
       el: 'Ένας από τους χαρακτηριστικούς χορευτικούς ρυθμούς της Κρήτης, μέσα από το ηχοχρωματικό πρίσμα της Εσμιγιάς μας.',
@@ -275,6 +296,7 @@ export const tracks = [
     schemaId: 'recording-syrtoi',
     src: '/audio/protos-syrtos.mp3',
     duration: 459,
+    kind: { el: 'Συρτά', en: 'Syrtos' },
     title: {
       el: 'Πρώτος συρτός · Μαδάρες · Λουσακιανός συρτός',
       en: 'Protos syrtos · Madares · Lousakianos syrtos',
@@ -300,6 +322,84 @@ export const featuredVideo = {
   },
 } as const;
 
+export const instruments = [
+  {
+    id: 'lyra',
+    name: { el: 'Λύρα', en: 'Lyra' },
+    text: {
+      el: 'Ο μελωδικός πυρήνας και ένας από τους ισχυρότερους δεσμούς με την κρητική παράδοση.',
+      en: 'The melodic core, and one of the strongest links to the Cretan tradition.',
+    },
+  },
+  {
+    id: 'laouto',
+    name: { el: 'Λαούτο', en: 'Laouto' },
+    text: {
+      el: 'Ρυθμική, αρμονική και μελωδική στήριξη — και μια ενεργή φωνή μέσα στο σύνολο.',
+      en: 'Rhythmic, harmonic and melodic support, and an active voice in the ensemble.',
+    },
+  },
+  {
+    id: 'flute',
+    name: { el: 'Φλάουτο', en: 'Flute' },
+    text: {
+      el: 'Ένα διαφορετικό μελωδικό ηχόχρωμα που διευρύνει την παλέτα του σχήματος.',
+      en: 'A contrasting melodic timbre that widens the ensemble’s palette.',
+    },
+  },
+  {
+    id: 'percussion',
+    name: { el: 'Κρουστά', en: 'Percussion' },
+    text: {
+      el: 'Ρυθμική ενέργεια και συνομιλία με τις χορευτικές δομές της παράδοσης.',
+      en: 'Rhythmic energy, in conversation with the dance structures of the tradition.',
+    },
+  },
+  {
+    id: 'bass',
+    name: { el: 'Κοντραμπάσο', en: 'Double bass' },
+    text: {
+      el: 'Βάθος και νέο ηχητικό πεδίο στο χαμηλό φάσμα του συνόλου.',
+      en: 'Low-frequency depth, and a new weight in the ensemble sound.',
+    },
+  },
+] as const;
+
+export const listeningLens = [
+  {
+    id: 'rhythms',
+    title: { el: 'Ρυθμούς', en: 'Rhythms' },
+    text: {
+      el: 'Μαλεβυζιώτηδες, συρτούς και άλλα ρυθμικά ιδιώματα της κρητικής παράδοσης.',
+      en: 'Malevyziotis, syrtos, and other rhythmic idioms of the Cretan tradition.',
+    },
+  },
+  {
+    id: 'melodies',
+    title: { el: 'Μελωδίες', en: 'Melodies' },
+    text: {
+      el: 'Παραδοσιακές μελωδικές φόρμες και νέα θέματα.',
+      en: 'Traditional melodic forms, and new themes written for the ensemble.',
+    },
+  },
+  {
+    id: 'sounds',
+    title: { el: 'Ήχους', en: 'Sounds' },
+    text: {
+      el: 'Τη συνύπαρξη της λύρας και του λαούτου με φλάουτο, κρουστά και κοντραμπάσο.',
+      en: 'Lyra and laouto heard together with flute, percussion and double bass.',
+    },
+  },
+  {
+    id: 'modes',
+    title: { el: 'Τρόπους', en: 'Modes' },
+    text: {
+      el: 'Τρόπους και μελωδικές φόρμες της κρητικής παράδοσης, μέσα από τον ήχο της Εσμιγιάς.',
+      en: 'The modal language of Cretan music, heard through Esmiya’s own sound.',
+    },
+  },
+] as const;
+
 export const dictionary = {
   el: {
     htmlLang: 'el',
@@ -316,6 +416,7 @@ export const dictionary = {
     nav: [
       { href: '#about', label: 'Η Εσμιγιά' },
       { href: '#music', label: 'Μουσική' },
+      { href: '#sound', label: 'Ο ήχος' },
       { href: '#media', label: 'Φωτογραφίες' },
       { href: '#members', label: 'Μουσικοί' },
       { href: '#contact', label: 'Επικοινωνία' },
@@ -323,27 +424,31 @@ export const dictionary = {
     heroKicker: 'Κρητική μουσική',
     heroTitle: 'Εσμιγιά',
     heroLatin: 'Esmiya',
-    heroLead: 'Νέες συνθέσεις που ανθολογούν την κρητική μουσική παράδοση.',
+    heroLead: 'Σύγχρονη μουσική από την Κρήτη, με αφετηρία την παράδοση.',
+    heroSupport: 'Νέες συνθέσεις, ενορχηστρώσεις και ο προσωπικός ήχος πέντε μουσικών.',
     instruments: 'Λύρα · Λαούτο · Φλάουτο · Κρουστά · Κοντραμπάσο',
     ctaAbout: 'Η ιστορία',
-    ctaMusic: 'Μουσική',
+    ctaMusic: 'Ακούστε',
     portraitAlt: 'Η Εσμιγιά: μουσικοί με λύρα, λαούτο, φλάουτο και κρουστά, μπροστά σε πέτρινο τοίχο.',
     aboutKicker: 'Το όνομα',
     aboutTitle: 'Η Εσμιγιά',
+    aboutBody: [
+      'Η Εσμιγιά γεννήθηκε από τη συνάντηση πέντε μουσικών και από την κοινή τους ανάγκη να εξερευνήσουν την κρητική μουσική μέσα από έναν σύγχρονο ήχο.',
+      'Το όνομά της παραπέμπει στη συνύπαρξη, στη συνεύρεση και στο σημείο όπου διαφορετικές μουσικές διαδρομές συναντιούνται.',
+    ],
     aboutQuote:
       'Η «Εσμιγιά» νοηματοδοτεί συμβολικά τη συνύπαρξη, την ανάγκη των ανθρώπων για συνεύρεση, την επικοινωνία και το σημείο συνάντησης στη δημιουργία ενός νέου μουσικού σχήματος. Με σκοπό τη ψυχαγωγία, πειραματίζονται, στο συγκερασμό των ηχοχρωμάτων, σε νέες συνθέσεις, ανθολογώντας την Κρητική μουσική παράδοση.',
-    identityKicker: 'Η μουσική',
-    identityTitle: 'Η μουσική της Εσμιγιάς',
-    identityBody: [
-      'Η Εσμιγιά ξεκινά από την κρητική μουσική παράδοση, χωρίς να την αντιμετωπίζει ως ένα μουσικό ιδίωμα που πρέπει απλώς να αναπαραχθεί.',
-      'Παραδοσιακοί δρόμοι, ρυθμοί, μελωδίες και ηχοχρώματα αποτελούν την αφετηρία για νέες συνθέσεις και μουσικούς πειραματισμούς. Η λύρα και το λαούτο παραμένουν στον πυρήνα του ήχου, ενώ το φλάουτο, τα μπαντουράκια, τα κρουστά και το κοντραμπάσο, διευρύνουν τον ηχητικό χώρο και δημιουργούν νέες σχέσεις ανάμεσα στη μελωδία, τον ρυθμό και το αρμονικό υπόβαθρο της κάθε μελωδικής φράσης.',
-      'Μας ενδιαφέρει η παράδοση ως ζωντανή μουσική γλώσσα: κάτι που μπορεί να μεταφερθεί, να μετασχηματιστεί και να ξανακουστεί με διαφορετικό τρόπο, χωρίς να χάνει την αναφορά του στην Κρήτη και γενικά από τις ρίζες του, από όποιο μέρος της Ελλάδας κι αν προέρχεται.',
-      'Στις συνθέσεις της Εσμιγιάς συνυπάρχουν η μνήμη της παραδοσιακής μουσικής, η προσωπική έκφραση των μουσικών και η διάθεση για πειραματισμό.',
+    soundKicker: 'Ο ήχος',
+    soundTitle: 'Ο ήχος της Εσμιγιάς',
+    soundBody: [
+      'Στον πυρήνα βρίσκονται η κρητική λύρα και το λαούτο — δύο όργανα άρρηκτα συνδεδεμένα με την κρητική μουσική παράδοση.',
+      'Το φλάουτο, τα κρουστά και το κοντραμπάσο διευρύνουν τον ηχητικό χώρο. Η συνύπαρξη αυτή δεν είναι απλώς μια μεγαλύτερη ενορχήστρωση· είναι μέρος της μουσικής αναζήτησης της Εσμιγιάς.',
     ],
-    identityClose: [
+    soundClose: [
       'Δεν προσπαθούμε να αναπαραστήσουμε το παρελθόν.',
       'Προσπαθούμε να συνομιλήσουμε μαζί του.',
     ],
+    listenForTitle: 'Τι ακούμε;',
     musicKicker: 'Ακούστε',
     musicTitle: 'Μουσική',
     musicIntro: [
@@ -367,12 +472,17 @@ export const dictionary = {
     galleryNext: 'Επόμενη φωτογραφία',
     galleryStatusLabel: 'Θέση στη συλλογή',
     galleryStatusTemplate: 'Φωτογραφία {n} από {total}',
+    galleryAll: 'Όλες',
+    galleryStage: 'Στη σκηνή',
+    galleryMusicians: 'Οι μουσικοί',
     membersKicker: 'Οι μουσικοί',
     membersTitle: 'Μουσικοί',
-    contactKicker: 'Γράψτε μας',
-    contactTitle: 'Επικοινωνία',
+    contactKicker: 'Ζωντανά',
+    contactTitle: 'Ζωντανά',
     contactBody: 'Η Εσμιγιά παρουσιάζει το μουσικό της πρόγραμμα σε συναυλίες, φεστιβάλ, πολιτιστικές εκδηλώσεις και χώρους που φιλοξενούν ζωντανή μουσική.',
-    contactLead: 'Για εμφανίσεις και συνεργασίες.',
+    contactLead: 'Για εμφανίσεις, συνεργασίες ή περισσότερες πληροφορίες.',
+    contactCta: 'Επικοινωνήστε μαζί μας',
+    liveLabel: 'Live',
     email: 'info@esmiya.gr',
     footer: 'Εσμιγιά',
     notFoundTitle: 'Η σελίδα δεν βρέθηκε',
@@ -395,6 +505,7 @@ export const dictionary = {
     nav: [
       { href: '#about', label: 'The band' },
       { href: '#music', label: 'Music' },
+      { href: '#sound', label: 'The sound' },
       { href: '#media', label: 'Photos' },
       { href: '#members', label: 'Members' },
       { href: '#contact', label: 'Contact' },
@@ -402,27 +513,33 @@ export const dictionary = {
     heroKicker: 'Cretan music',
     heroTitle: 'Esmiya',
     heroLatin: '',
-    heroLead: 'New compositions drawn from the Cretan musical tradition.',
+    heroLead: 'Contemporary music from Crete, beginning in tradition.',
+    heroSupport:
+      'A five-musician ensemble. Cretan lyra and laouto sit at the core; new compositions grow from the island’s living musical language.',
     instruments: 'Lyra · Laouto · Flute · Percussion · Double bass',
     ctaAbout: 'The story',
-    ctaMusic: 'Music',
+    ctaMusic: 'Listen',
     portraitAlt: 'Esmiya: musicians with lyra, laouto, flute and percussion, in front of a stone wall.',
     aboutKicker: 'The name',
     aboutTitle: 'Esmiya',
+    aboutBody: [
+      'Esmiya began when five musicians met around a shared need: to explore Cretan music through a contemporary sound.',
+      'The name points to coexistence — to coming together, and to the place where different musical paths meet.',
+      'Cretan music is the living tradition of Crete. Lyra and laouto are at its core. Esmiya starts there, then lets each musician’s instrument and language widen the sound.',
+    ],
     aboutQuote:
       '“Esmiya” stands for coexistence, for the need to come together, for communication, and for the meeting point from which a new ensemble is born. They experiment in the blending of timbres and in new compositions, anthologizing the Cretan musical tradition.',
-    identityKicker: 'The music',
-    identityTitle: 'The music of Esmiya',
-    identityBody: [
-      'Esmiya begins in the Cretan musical tradition, and does not treat it as a style that only needs to be reproduced.',
-      'Traditional paths, rhythms, melodies and timbres are the starting point for new compositions and musical experiments. The lyra and the laouto stay at the core of the sound, while the flute, mandourakia, percussion and double bass widen that space and create new relationships between melody, rhythm and the harmonic ground of each phrase.',
-      'What matters is tradition as a living musical language: something that can be carried, transformed and heard again in a different way, while it still refers to Crete — and to roots from whichever part of Greece they come.',
-      'In Esmiya’s compositions, the memory of traditional music, each musician’s own expression, and a willingness to experiment exist together.',
+    soundKicker: 'The sound',
+    soundTitle: 'The sound of Esmiya',
+    soundBody: [
+      'At the core are the Cretan lyra and the laouto — two instruments bound to the island’s musical tradition.',
+      'Flute, percussion and double bass widen that space. Their meeting is not simply a larger scoring of traditional music; it is part of Esmiya’s musical inquiry.',
     ],
-    identityClose: [
+    soundClose: [
       'We are not trying to reconstruct the past.',
       'We are trying to be in conversation with it.',
     ],
+    listenForTitle: 'What you hear',
     musicKicker: 'Listen',
     musicTitle: 'Music',
     musicIntro: [
@@ -446,12 +563,17 @@ export const dictionary = {
     galleryNext: 'Next photo',
     galleryStatusLabel: 'Gallery position',
     galleryStatusTemplate: 'Photo {n} of {total}',
+    galleryAll: 'All',
+    galleryStage: 'On stage',
+    galleryMusicians: 'The musicians',
     membersKicker: 'The musicians',
     membersTitle: 'Musicians',
-    contactKicker: 'Contact',
-    contactTitle: 'Contact',
-    contactBody: 'Esmiya presents its musical program in concerts, festivals, cultural events, and venues that host live music.',
-    contactLead: 'For performances and collaborations.',
+    contactKicker: 'Live',
+    contactTitle: 'Live',
+    contactBody: 'Esmiya presents its program in concerts, festivals, cultural events, and rooms that host live music.',
+    contactLead: 'For performances, collaborations, or more information.',
+    contactCta: 'Get in touch',
+    liveLabel: 'Live',
     email: 'info@esmiya.gr',
     footer: 'Esmiya',
     notFoundTitle: 'Page not found',
