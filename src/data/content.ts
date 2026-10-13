@@ -286,10 +286,12 @@ export const tracks = [
   },
 ] as const;
 
-/** https://youtu.be/ZlkKvp1uZso — title from the public YouTube video, hashtags removed. */
+/** https://youtu.be/ZlkKvp1uZso — title, upload date, and length from the public YouTube video. */
 export const featuredVideo = {
   id: 'video-1',
   youtubeId: 'ZlkKvp1uZso',
+  uploadDate: '2025-11-27T00:38:58-08:00',
+  duration: 284,
   title: {
     el: 'Εσμιγιά — Από την άκρη του γιαλού, live στη Μουσική σκηνή 1002 Νύχτες',
     en: 'Esmiya — Από την άκρη του γιαλού, live at Mousiki Skini 1002 Nychtes',
