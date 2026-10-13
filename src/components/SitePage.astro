@@ -28,8 +28,14 @@ const jsonLd = JSON.stringify(structuredData(locale)).replace(/</g, '\\u003c');
     <section class="hero" id="top">
       <div class="hero-copy">
         <p class="kicker">{t.heroKicker}</p>
-        <h1>{t.heroTitle}</h1>
-        {t.heroLatin && <p class="latin">{t.heroLatin}</p>}
+        <h1 class="visually-hidden">{t.heroTitle}</h1>
+        <img
+          class="hero-wordmark"
+          src={locale === 'el' ? '/images/wordmark-el.svg?v=7' : '/images/wordmark-en.svg?v=6'}
+          width={locale === 'el' ? 2804 : 2664}
+          height={locale === 'el' ? 825 : 913}
+          alt=""
+        />
         <p class="lead">{t.heroLead}</p>
         <p class="instruments">{t.instruments}</p>
         <div class="hero-actions">

@@ -177,6 +177,13 @@ a {
   letter-spacing: -0.03em;
 }
 
+.hero-wordmark {
+  display: block;
+  width: min(100%, 34rem);
+  height: auto;
+  margin: 0.15rem 0 0;
+}
+
 .latin {
   margin: 0.85rem 0 0;
   font-family: var(--serif);
